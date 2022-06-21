@@ -15,6 +15,7 @@ import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.cocktailme.R;
 import com.example.cocktailme.models.Ingredients;
 import com.parse.ParseObject;
 

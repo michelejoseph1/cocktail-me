@@ -3,6 +3,8 @@ package com.example.cocktailme;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.cocktailme.R;
+
 public class Testing extends AppCompatActivity {
 
     @Override

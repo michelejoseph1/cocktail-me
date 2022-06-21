@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.cocktailme.R;
 import com.parse.ParseUser;
 
 public class SettingsActivity extends AppCompatActivity {

@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.cocktailme.R;
 import com.parse.LogInCallback;
 import com.parse.ParseUser;
 
@@ -63,6 +65,8 @@ import java.text.ParseException;
                         Toast.makeText(LoginActivity.this, "Issue with login!", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    Log.d(TAG, "login worked");
+
                     goMainActivity();
                     Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
                 }
