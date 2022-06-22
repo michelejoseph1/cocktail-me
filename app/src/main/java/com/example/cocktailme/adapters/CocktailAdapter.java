@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.cocktailme.R;
+import com.example.cocktailme.RecipeDetailsActivity;
 import com.example.cocktailme.RecipesActivity;
 import com.example.cocktailme.models.Ingredients;
 
@@ -57,13 +58,13 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title;
-        TextView recipeDesc;
+        TextView recDesc;
         ImageView ivCocktail;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             title = itemView.findViewById(R.id.title);
-            recipeDesc = itemView.findViewById(R.id.recipeDesc);
+            recDesc = itemView.findViewById(R.id.recipeDesc);
             ivCocktail = itemView.findViewById(R.id.ivCocktail);
             itemView.setOnClickListener(this);
         }
@@ -77,7 +78,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
                 // get the movie at the position, this won't work if the class is static
                 Ingredients ingredient = ingredients.get(position);
                 // create intent for the new activity
-               Intent intent = new Intent(context, RecipesActivity.class);
+               Intent intent = new Intent(context, RecipeDetailsActivity.class);
                 // serialize the movie using parceler, use its short name as a key
                intent.putExtra(Ingredients.class.getSimpleName(), Parcels.wrap(ingredient));
                 // show the activity
@@ -86,10 +87,13 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
         }
         public void bind(Ingredients ingredient) {
             Log.d("CocktailAdapter", "bind reached");
-            title.setText("test");
-           // title.setText(ingredient.getRecipeTitle());
-            //recipeDesc.setText(ingredient.getRecipeDesc());
+            title.setText(ingredient.getRecipeTitle());
+            recDesc.setText(ingredient.getRecipeDesc());
+            String imageURL;
 
+
+            imageURL = ingredient.getCocktailPath();
+            Glide.with(context).load(imageURL).into(ivCocktail);
             }
 
         }

@@ -72,6 +72,7 @@ public class RecipesActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 Log.d(TAG, "onSuccess. The response is " + json.toString());
                 JSONObject jsonObject = json.jsonObject;
+
                 try {
                     rvRecipes.setAdapter(cocktailAdapter);
 
@@ -82,16 +83,7 @@ public class RecipesActivity extends AppCompatActivity {
                     JSONArray drinks = jsonObject.getJSONArray("drinks");
                     ingredients.addAll(Ingredients.fromJsonArray(drinks));
                     cocktailAdapter.notifyDataSetChanged();
-                    Log.i(TAG, "Resu: " + drinks.toString());
-
-
-
-
-//                    JSONObject strDrink = drinks.getJSONObject(0);
-//                    String drink = strDrink.getString("strDrink");
-
-
-                    //Log.d(TAG, "Results: " + drink.toString());
+                    Log.d(TAG, "Results: " + drinks.toString());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -104,4 +96,3 @@ public class RecipesActivity extends AppCompatActivity {
         });
     }
 }
-//test

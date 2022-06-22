@@ -2,6 +2,7 @@ package com.example.cocktailme.models;
 
 
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
@@ -16,19 +17,20 @@ import java.util.List;
 
 @Parcel
 public class Ingredients {
-    String ingredientName;
     String title;
-    String recipeDesc;
+    String recDesc;
+    String cocktailPath;
+    public static final String TAG = "Ingredients";
 
     public Ingredients() {
     }
 
     public Ingredients(JSONObject jsonObject) throws JSONException {
-        JSONArray drinks = jsonObject.getJSONArray("drinks");
+        title = jsonObject.getString("strDrink");
+        cocktailPath = jsonObject.getString("strDrinkThumb");
+        //recDesc = jsonObject.getString("strInstructions");
+        Log.d(TAG, "hi " + recDesc);
 
-        JSONObject strDrink = drinks.getJSONObject(0);
-        title = strDrink.getString("strDrink");
-        Log.d("key", "hi" + title);
 
     }
     public static List<Ingredients> fromJsonArray(JSONArray recipeJsonArray) throws JSONException {
@@ -39,12 +41,17 @@ public class Ingredients {
         return ingredients;
     }
 
+    public String getCocktailPath() {
+        return String.format(cocktailPath);
+
+    }
+
     public String getRecipeTitle() {
         return title;
     }
 
     public String getRecipeDesc() {
-        return recipeDesc;
+        return recDesc;
     }
 }
 
