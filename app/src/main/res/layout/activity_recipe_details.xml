@@ -7,10 +7,17 @@
     tools:context=".RecipeDetailsActivity">
 
     <TextView
+<<<<<<< HEAD
         android:id="@+id/recipeTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Recipe Title"
+=======
+        android:id="@+id/recTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Movie Title"
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +25,11 @@
 
 
     <TextView
+<<<<<<< HEAD
         android:id="@+id/recipeInstructions"
+=======
+        android:id="@+id/recDesc"
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -26,5 +37,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+<<<<<<< HEAD
         app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
+=======
+        app:layout_constraintTop_toBottomOf="@+id/recTitle" />
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
 </androidx.constraintlayout.widget.ConstraintLayout>
