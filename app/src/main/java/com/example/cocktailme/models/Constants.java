@@ -5,6 +5,7 @@ package com.example.cocktailme.models;
 public class Constants {
 
     public static final String[] INGREDIENT_LIST = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
+<<<<<<< HEAD
 =======
 package com.example.cocktailme;
 
@@ -23,6 +24,8 @@ public class Constants {
 =======
     public static String[] ingredient_list = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
 >>>>>>> 3f0798d (changes ingredient list variable name)
+=======
+>>>>>>> 2078a8e (fixing PR comments)
             "Absolut Kurant", "Absolut Peppar", "Absolut Vodka", "Advocaat", "Aejo Rum",
             "Aftershock", "Agave Syrup", "Ale", "Allspice", "Almond Flavoring", "Almond", "Amaretto", "Angelica Root",
             "Angostura Bitters", "Anis", "Anise", "Anisette", "Aperol", "Apfelkorn", "Apple Brandy",

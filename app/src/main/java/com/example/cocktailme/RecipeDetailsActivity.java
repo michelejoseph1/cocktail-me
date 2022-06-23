@@ -30,14 +30,19 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 >>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
 =======
     Cocktails ingredient;
+<<<<<<< HEAD
     TextView recTitle, recDesc;
 >>>>>>> 72cc745 (fixing after PR comments)
+=======
+    TextView recTitle, recipeInstructions;
+>>>>>>> 2078a8e (fixing PR comments)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         recipeTitle = findViewById(R.id.recipeTitle);
 
@@ -47,6 +52,10 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 =======
         recTitle = findViewById(R.id.recTitle);
         recDesc = findViewById(R.id.recDesc);
+=======
+        recTitle = findViewById(R.id.recipeTitle);
+        recipeInstructions = findViewById(R.id.recipeInstructions);
+>>>>>>> 2078a8e (fixing PR comments)
 
         ingredient = (Cocktails) Parcels.unwrap(getIntent().getParcelableExtra(Cocktails.class.getSimpleName()));
 

@@ -43,7 +43,7 @@ import java.util.List;
 @Parcel
 public class Cocktails {
     String title;
-    String recDesc;
+    String recipeInstructions;
     String cocktailPath;
     public static final String TAG = "Cocktails";
 
@@ -54,16 +54,21 @@ public class Cocktails {
         title = jsonObject.getString("strDrink");
         cocktailPath = jsonObject.getString("strDrinkThumb");
         //recDesc = jsonObject.getString("strInstructions");
-        Log.d(TAG, "hi " + recDesc);
+        Log.d(TAG, "hi " + recipeInstructions);
 
 
     }
     public static List<Cocktails> fromJsonArray(JSONArray recipeJsonArray) throws JSONException {
         List<Cocktails> ingredients = new ArrayList<>();
+<<<<<<< HEAD
         for (int i = 0; i < recipeJsonArray.length(); i++) {
 
 
             ingredients.add(new Cocktails(recipeJsonArray.getJSONObject(i)));
+=======
+        for (int recipe = 0; recipe < recipeJsonArray.length(); recipe++) {
+            ingredients.add(new Cocktails(recipeJsonArray.getJSONObject(recipe)));
+>>>>>>> 2078a8e (fixing PR comments)
         }
         return ingredients;
     }
@@ -77,4 +82,10 @@ public class Cocktails {
         return title;
     }
 
+<<<<<<< HEAD
+=======
+    public String getRecipeDesc() {
+        return recipeInstructions;
+    }
+>>>>>>> 2078a8e (fixing PR comments)
 }
