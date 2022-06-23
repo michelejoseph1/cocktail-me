@@ -16,11 +16,15 @@ import com.bumptech.glide.Glide;
 import com.example.cocktailme.R;
 import com.example.cocktailme.RecipeDetailsActivity;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.example.cocktailme.models.Cocktails;
 =======
 import com.example.cocktailme.RecipesActivity;
 import com.example.cocktailme.models.Ingredients;
 >>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
+=======
+import com.example.cocktailme.models.Cocktails;
+>>>>>>> 72cc745 (fixing after PR comments)
 
 import org.parceler.Parcels;
 

@@ -72,6 +72,7 @@ import java.text.ParseException;
         }
 
         private void goMainActivity() {
+<<<<<<< HEAD
             Intent loginToMain = new Intent(this, MainActivity.class);
             startActivity(loginToMain);
             finish();
@@ -79,6 +80,15 @@ import java.text.ParseException;
         private void goSignUp() {
             Intent loginToSignUp = new Intent(this, SignUpActivity.class);
             startActivity(loginToSignUp);
+=======
+            Intent here_to_main = new Intent(this, MainActivity.class);
+            startActivity(here_to_main);
+            finish();
+        }
+        private void goSignUp() {
+            Intent here_to_sign_up = new Intent(this, SignUpActivity.class);
+            startActivity(here_to_sign_up);
+>>>>>>> 72cc745 (fixing after PR comments)
             finish();
         }
     }

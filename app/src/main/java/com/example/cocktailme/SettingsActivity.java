@@ -24,8 +24,13 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ParseUser.logOut();
+<<<<<<< HEAD
                 Intent settingsToLogin = new Intent(SettingsActivity.this, LoginActivity.class);
                 startActivity(settingsToLogin);
+=======
+                Intent settings_to_login = new Intent(SettingsActivity.this, LoginActivity.class);
+                startActivity(settings_to_login);
+>>>>>>> 72cc745 (fixing after PR comments)
             }
         });
     }

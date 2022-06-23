@@ -1,6 +1,11 @@
 package com.example.cocktailme;
 
+<<<<<<< HEAD
 import static com.example.cocktailme.models.Constants.INGREDIENT_LIST;
+=======
+import static com.example.cocktailme.models.Constants.fewRandomSuggestedText;
+
+>>>>>>> 72cc745 (fixing after PR comments)
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,6 +25,7 @@ import com.parse.ParseObject;
 public class MainActivity extends AppCompatActivity {
 
     MultiAutoCompleteTextView multiAutoCompleteTextViewDefault;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     String[] fewRandomSuggestedText = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
@@ -73,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
     };
 >>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
+=======
+>>>>>>> 72cc745 (fixing after PR comments)
 
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/filter.php";
     public static final String TAG = "MainActivity";
@@ -110,7 +118,11 @@ public class MainActivity extends AppCompatActivity {
 
         multiAutoCompleteTextViewDefault = findViewById(R.id.multiAutoCompleteTextViewDefault);
         ArrayAdapter<String> randomArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+<<<<<<< HEAD
                 INGREDIENT_LIST);
+=======
+                fewRandomSuggestedText);
+>>>>>>> 72cc745 (fixing after PR comments)
         multiAutoCompleteTextViewDefault.setAdapter(randomArrayAdapter);
 
         multiAutoCompleteTextViewDefault.setThreshold(1);
@@ -133,12 +145,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goSettingsActivity() {
+<<<<<<< HEAD
         Intent mainToSettings = new Intent(this, SettingsActivity.class);
         startActivity(mainToSettings);
+=======
+        Intent main_to_settings = new Intent(this, SettingsActivity.class);
+        startActivity(main_to_settings);
+>>>>>>> 72cc745 (fixing after PR comments)
         finish();
     }
 
     private void goRecipesActivity() {
+<<<<<<< HEAD
 <<<<<<< HEAD
         Intent mainToRecipes = new Intent(this, RecipesActivity.class);
         mainToRecipes.putExtra("search", insertedIngredients);
@@ -148,6 +166,11 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra("search", insertedIngredients);
         startActivity(i);
 >>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
+=======
+        Intent main_to_recipes = new Intent(this, RecipesActivity.class);
+        main_to_recipes.putExtra("search", insertedIngredients);
+        startActivity(main_to_recipes);
+>>>>>>> 72cc745 (fixing after PR comments)
         finish();
     }
 }
