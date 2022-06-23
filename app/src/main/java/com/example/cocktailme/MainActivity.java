@@ -81,15 +81,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goSettingsActivity() {
-        Intent main_to_settings = new Intent(this, SettingsActivity.class);
-        startActivity(main_to_settings);
+        Intent mainToSettings = new Intent(this, SettingsActivity.class);
+        startActivity(mainToSettings);
         finish();
     }
 
     private void goRecipesActivity() {
-        Intent main_to_recipes = new Intent(this, RecipesActivity.class);
-        main_to_recipes.putExtra("search", insertedIngredients);
-        startActivity(main_to_recipes);
+        Intent mainToRecipes = new Intent(this, RecipesActivity.class);
+        mainToRecipes.putExtra("search", insertedIngredients);
+        startActivity(mainToRecipes);
         finish();
     }
 }
