@@ -2,6 +2,12 @@ package com.example.cocktailme.models;
 
 
 import android.util.Log;
+<<<<<<< HEAD
+=======
+import android.widget.ImageView;
+
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+>>>>>>> 6f10ccf (fixing after PR comments)
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,6 +15,7 @@ import org.json.JSONObject;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.List;
 
 @Parcel
@@ -31,6 +38,33 @@ public class Cocktails {
         List<Cocktails> ingredients = new ArrayList<>();
         for (int recipe = 0; recipe < recipeJsonArray.length(); recipe++) {
             ingredients.add(new Cocktails(recipeJsonArray.getJSONObject(recipe)));
+=======
+import java.util.Arrays;
+import java.util.List;
+
+@Parcel
+public class Ingredients {
+    String title;
+    String recDesc;
+    String cocktailPath;
+    public static final String TAG = "Ingredients";
+
+    public Ingredients() {
+    }
+
+    public Ingredients(JSONObject jsonObject) throws JSONException {
+        title = jsonObject.getString("strDrink");
+        cocktailPath = jsonObject.getString("strDrinkThumb");
+        //recDesc = jsonObject.getString("strInstructions");
+        Log.d(TAG, "hi " + recDesc);
+
+
+    }
+    public static List<Ingredients> fromJsonArray(JSONArray recipeJsonArray) throws JSONException {
+        List<Ingredients> ingredients = new ArrayList<>();
+        for (int i = 0; i < recipeJsonArray.length(); i++) {
+            ingredients.add(new Ingredients(recipeJsonArray.getJSONObject(i)));
+>>>>>>> 6f10ccf (fixing after PR comments)
         }
         return ingredients;
     }
@@ -44,5 +78,11 @@ public class Cocktails {
         return title;
     }
 
+<<<<<<< HEAD
+=======
+    public String getRecipeDesc() {
+        return recDesc;
+    }
+>>>>>>> 6f10ccf (fixing after PR comments)
 }
 
