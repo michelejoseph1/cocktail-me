@@ -56,13 +56,13 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title;
-        TextView recDesc;
+        TextView recipeDesc;
         ImageView ivCocktail;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             title = itemView.findViewById(R.id.title);
-            recDesc = itemView.findViewById(R.id.recipeDesc);
+            recipeDesc = itemView.findViewById(R.id.recipeDesc);
             ivCocktail = itemView.findViewById(R.id.ivCocktail);
             itemView.setOnClickListener(this);
         }
@@ -86,7 +86,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
         public void bind(Cocktails ingredient) {
             Log.d("CocktailAdapter", "bind reached");
             title.setText(ingredient.getRecipeTitle());
-            recDesc.setText(ingredient.getRecipeDesc());
+            recipeDesc.setText(ingredient.getRecipeDesc());
             String imageURL;
 
 

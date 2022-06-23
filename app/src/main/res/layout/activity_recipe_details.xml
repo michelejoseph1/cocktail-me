@@ -7,10 +7,10 @@
     tools:context=".RecipeDetailsActivity">
 
     <TextView
-        android:id="@+id/recTitle"
+        android:id="@+id/recipeTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Movie Title"
+        android:text="Recipe Title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +18,7 @@
 
 
     <TextView
-        android:id="@+id/recDesc"
+        android:id="@+id/recipeInstructions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -26,5 +26,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
