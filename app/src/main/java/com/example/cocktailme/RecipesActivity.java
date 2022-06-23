@@ -12,7 +12,7 @@ import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cocktailme.adapters.CocktailAdapter;
-import com.example.cocktailme.models.Ingredients;
+import com.example.cocktailme.models.Cocktails;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,8 +28,6 @@ public class RecipesActivity extends AppCompatActivity {
     public static final String TAG = "RecipesActivity";
     public AsyncHttpClient client;
     String insertedIngredients;
-    List<Ingredients> ingredients;
-    List<String> drinkNames;
 
 
     @Override
@@ -81,7 +79,7 @@ public class RecipesActivity extends AppCompatActivity {
 
 
                     JSONArray drinks = jsonObject.getJSONArray("drinks");
-                    ingredients.addAll(Ingredients.fromJsonArray(drinks));
+                    ingredients.addAll(Cocktails.fromJsonArray(drinks));
                     cocktailAdapter.notifyDataSetChanged();
                     Log.d(TAG, "Results: " + drinks.toString());
 

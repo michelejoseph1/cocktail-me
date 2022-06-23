@@ -5,15 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.cocktailme.models.Ingredients;
+import com.example.cocktailme.models.Cocktails;
 
 import org.parceler.Parcels;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
 
-    Ingredients ingredient;
-    TextView recTitle;
-    TextView recDesc;
+    Cocktails ingredient;
+    TextView recTitle, recDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         recTitle = findViewById(R.id.recTitle);
         recDesc = findViewById(R.id.recDesc);
 
-        ingredient = (Ingredients) Parcels.unwrap(getIntent().getParcelableExtra(Ingredients.class.getSimpleName()));
+        ingredient = (Cocktails) Parcels.unwrap(getIntent().getParcelableExtra(Cocktails.class.getSimpleName()));
 
         recTitle.setText(ingredient.getRecipeTitle());
 

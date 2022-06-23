@@ -2,9 +2,6 @@ package com.example.cocktailme.models;
 
 
 import android.util.Log;
-import android.widget.ImageView;
-
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,20 +9,19 @@ import org.json.JSONObject;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Parcel
-public class Ingredients {
+public class Cocktails {
     String title;
     String recDesc;
     String cocktailPath;
-    public static final String TAG = "Ingredients";
+    public static final String TAG = "Cocktails";
 
-    public Ingredients() {
+    public Cocktails() {
     }
 
-    public Ingredients(JSONObject jsonObject) throws JSONException {
+    public Cocktails(JSONObject jsonObject) throws JSONException {
         title = jsonObject.getString("strDrink");
         cocktailPath = jsonObject.getString("strDrinkThumb");
         //recDesc = jsonObject.getString("strInstructions");
@@ -33,10 +29,10 @@ public class Ingredients {
 
 
     }
-    public static List<Ingredients> fromJsonArray(JSONArray recipeJsonArray) throws JSONException {
-        List<Ingredients> ingredients = new ArrayList<>();
+    public static List<Cocktails> fromJsonArray(JSONArray recipeJsonArray) throws JSONException {
+        List<Cocktails> ingredients = new ArrayList<>();
         for (int i = 0; i < recipeJsonArray.length(); i++) {
-            ingredients.add(new Ingredients(recipeJsonArray.getJSONObject(i)));
+            ingredients.add(new Cocktails(recipeJsonArray.getJSONObject(i)));
         }
         return ingredients;
     }
