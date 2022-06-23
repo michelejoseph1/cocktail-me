@@ -2,7 +2,7 @@ package com.example.cocktailme.models;
 
 public class Constants {
 
-    public static String[] fewRandomSuggestedText = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
+    public static String[] ingredient_list = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
             "Absolut Kurant", "Absolut Peppar", "Absolut Vodka", "Advocaat", "Aejo Rum",
             "Aftershock", "Agave Syrup", "Ale", "Allspice", "Almond Flavoring", "Almond", "Amaretto", "Angelica Root",
             "Angostura Bitters", "Anis", "Anise", "Anisette", "Aperol", "Apfelkorn", "Apple Brandy",
