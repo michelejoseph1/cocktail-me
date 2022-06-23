@@ -1,9 +1,14 @@
 package com.example.cocktailme;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import static com.example.cocktailme.models.Constants.INGREDIENT_LIST;
 =======
 import static com.example.cocktailme.models.Constants.fewRandomSuggestedText;
+=======
+import static com.example.cocktailme.models.Constants.ingredient_list;
+import static com.example.cocktailme.models.Constants.ingredient_list;
+>>>>>>> 3f0798d (changes ingredient list variable name)
 
 >>>>>>> 72cc745 (fixing after PR comments)
 import androidx.appcompat.app.AppCompatActivity;
@@ -119,10 +124,14 @@ public class MainActivity extends AppCompatActivity {
         multiAutoCompleteTextViewDefault = findViewById(R.id.multiAutoCompleteTextViewDefault);
         ArrayAdapter<String> randomArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
 <<<<<<< HEAD
+<<<<<<< HEAD
                 INGREDIENT_LIST);
 =======
                 fewRandomSuggestedText);
 >>>>>>> 72cc745 (fixing after PR comments)
+=======
+                ingredient_list);
+>>>>>>> 3f0798d (changes ingredient list variable name)
         multiAutoCompleteTextViewDefault.setAdapter(randomArrayAdapter);
 
         multiAutoCompleteTextViewDefault.setThreshold(1);
