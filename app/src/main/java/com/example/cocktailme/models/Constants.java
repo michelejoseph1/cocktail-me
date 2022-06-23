@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 package com.example.cocktailme.models;
 
 public class Constants {
 
     public static final String[] INGREDIENT_LIST = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
+=======
+package com.example.cocktailme;
+
+public class Constants {
+
+    String[] fewRandomSuggestedText = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
+>>>>>>> 6f10ccf (fixing after PR comments)
             "Absolut Kurant", "Absolut Peppar", "Absolut Vodka", "Advocaat", "Aejo Rum",
             "Aftershock", "Agave Syrup", "Ale", "Allspice", "Almond Flavoring", "Almond", "Amaretto", "Angelica Root",
             "Angostura Bitters", "Anis", "Anise", "Anisette", "Aperol", "Apfelkorn", "Apple Brandy",
