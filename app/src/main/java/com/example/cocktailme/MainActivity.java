@@ -146,16 +146,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void goSettingsActivity() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         Intent mainToSettings = new Intent(this, SettingsActivity.class);
         startActivity(mainToSettings);
 =======
         Intent main_to_settings = new Intent(this, SettingsActivity.class);
         startActivity(main_to_settings);
 >>>>>>> 72cc745 (fixing after PR comments)
+=======
+        Intent mainToSettings = new Intent(this, SettingsActivity.class);
+        startActivity(mainToSettings);
+>>>>>>> d1da0c8 (fixed variable names for java)
         finish();
     }
 
     private void goRecipesActivity() {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         Intent mainToRecipes = new Intent(this, RecipesActivity.class);
@@ -171,6 +177,11 @@ public class MainActivity extends AppCompatActivity {
         main_to_recipes.putExtra("search", insertedIngredients);
         startActivity(main_to_recipes);
 >>>>>>> 72cc745 (fixing after PR comments)
+=======
+        Intent mainToRecipes = new Intent(this, RecipesActivity.class);
+        mainToRecipes.putExtra("search", insertedIngredients);
+        startActivity(mainToRecipes);
+>>>>>>> d1da0c8 (fixed variable names for java)
         finish();
     }
 }
