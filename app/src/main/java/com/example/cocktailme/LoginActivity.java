@@ -72,13 +72,13 @@ import java.text.ParseException;
         }
 
         private void goMainActivity() {
-            Intent here_to_main = new Intent(this, MainActivity.class);
-            startActivity(here_to_main);
+            Intent login_to_main = new Intent(this, MainActivity.class);
+            startActivity(login_to_main);
             finish();
         }
         private void goSignUp() {
-            Intent here_to_sign_up = new Intent(this, SignUpActivity.class);
-            startActivity(here_to_sign_up);
+            Intent login_to_sign_up = new Intent(this, SignUpActivity.class);
+            startActivity(login_to_sign_up);
             finish();
         }
     }
