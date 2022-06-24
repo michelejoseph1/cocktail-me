@@ -3,24 +3,19 @@ package com.example.cocktailme.models;
 
 import android.util.Log;
 
-import android.widget.ImageView;
-
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 @Parcel
 public class Cocktails {
     String title;
     String cocktailPath;
+    int cocktailID;
     public static final String TAG = "Cocktails";
 
     public Cocktails() {
@@ -29,49 +24,17 @@ public class Cocktails {
     public Cocktails(JSONObject jsonObject) throws JSONException {
         title = jsonObject.getString("strDrink");
         cocktailPath = jsonObject.getString("strDrinkThumb");
-        //recDesc = jsonObject.getString("strInstructions");
-
-
-    }
-    public static List<Cocktails> fromJsonArray(JSONArray recipeJsonArray) throws JSONException {
-        List<Cocktails> ingredients = new ArrayList<>();
-        for (int recipe = 0; recipe < recipeJsonArray.length(); recipe++) {
-            ingredients.add(new Cocktails(recipeJsonArray.getJSONObject(recipe)));
-import java.util.Arrays;
-import java.util.List;
-
-@Parcel
-public class Cocktails {
-    String title;
-    String recipeInstructions;
-    String cocktailPath;
-    public static final String TAG = "Cocktails";
-
-    public Cocktails() {
+        cocktailID = jsonObject.getInt("idDrink");
     }
 
-    public Cocktails(JSONObject jsonObject) throws JSONException {
-        title = jsonObject.getString("strDrink");
-        cocktailPath = jsonObject.getString("strDrinkThumb");
-        //recDesc = jsonObject.getString("strInstructions");
-        Log.d(TAG, "hi " + recipeInstructions);
-
-
-    }
-    public static List<Cocktails> fromJsonArray(JSONArray recipeJsonArray) throws JSONException {
-        List<Cocktails> ingredients = new ArrayList<>();
-<<<<<<< HEAD
-        for (int i = 0; i < recipeJsonArray.length(); i++) {
-
-
-            ingredients.add(new Cocktails(recipeJsonArray.getJSONObject(i)));
-=======
-        for (int recipe = 0; recipe < recipeJsonArray.length(); recipe++) {
-            ingredients.add(new Cocktails(recipeJsonArray.getJSONObject(recipe)));
->>>>>>> 2078a8e (fixing PR comments)
+    public static List<Cocktails> fromJsonArray(JSONArray cocktailJsonArray) throws JSONException {
+        List<Cocktails> cocktailList = new ArrayList<>();
+        for (int cocktail = 0; cocktail < cocktailJsonArray.length(); cocktail++) {
+            cocktailList.add(new Cocktails(cocktailJsonArray.getJSONObject(cocktail)));
         }
-        return ingredients;
+        return cocktailList;
     }
+
 
     public String getCocktailPath() {
         return String.format(cocktailPath);
@@ -81,11 +44,8 @@ public class Cocktails {
     public String getRecipeTitle() {
         return title;
     }
-
-<<<<<<< HEAD
-=======
-    public String getRecipeDesc() {
-        return recipeInstructions;
+    public int getID() {
+        return cocktailID;
     }
->>>>>>> 2078a8e (fixing PR comments)
+
 }
