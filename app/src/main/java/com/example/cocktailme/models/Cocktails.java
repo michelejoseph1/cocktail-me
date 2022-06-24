@@ -14,7 +14,6 @@ import java.util.List;
 @Parcel
 public class Cocktails {
     String title;
-    String recipeInstructions;
     String cocktailPath;
     public static final String TAG = "Cocktails";
 
@@ -25,7 +24,6 @@ public class Cocktails {
         title = jsonObject.getString("strDrink");
         cocktailPath = jsonObject.getString("strDrinkThumb");
         //recDesc = jsonObject.getString("strInstructions");
-        Log.d(TAG, "hi " + recipeInstructions);
 
 
     }
@@ -46,8 +44,5 @@ public class Cocktails {
         return title;
     }
 
-    public String getRecipeDesc() {
-        return recipeInstructions;
-    }
 }
 

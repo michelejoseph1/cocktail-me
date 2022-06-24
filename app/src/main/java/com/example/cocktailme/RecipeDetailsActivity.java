@@ -12,7 +12,7 @@ import org.parceler.Parcels;
 public class RecipeDetailsActivity extends AppCompatActivity {
 
     Cocktails cocktail;
-    TextView recipeTitle, recipeInstructions;
+    TextView recipeTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_details);
 
         recipeTitle = findViewById(R.id.recipeTitle);
-        recipeInstructions = findViewById(R.id.recipeInstructions);
 
         cocktail = (Cocktails) Parcels.unwrap(getIntent().getParcelableExtra(Cocktails.class.getSimpleName()));
 
