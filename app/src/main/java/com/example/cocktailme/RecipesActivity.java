@@ -12,7 +12,7 @@ import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cocktailme.adapters.CocktailAdapter;
-import com.example.cocktailme.models.Ingredients;
+import com.example.cocktailme.models.Cocktails;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,8 +28,6 @@ public class RecipesActivity extends AppCompatActivity {
     public static final String TAG = "RecipesActivity";
     public AsyncHttpClient client;
     String insertedIngredients;
-    List<Ingredients> ingredients;
-    List<String> drinkNames;
 
 
     @Override
@@ -72,6 +70,7 @@ public class RecipesActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 Log.d(TAG, "onSuccess. The response is " + json.toString());
                 JSONObject jsonObject = json.jsonObject;
+
                 try {
                     rvRecipes.setAdapter(cocktailAdapter);
 
@@ -80,18 +79,9 @@ public class RecipesActivity extends AppCompatActivity {
 
 
                     JSONArray drinks = jsonObject.getJSONArray("drinks");
-                    ingredients.addAll(Ingredients.fromJsonArray(drinks));
+                    ingredients.addAll(Cocktails.fromJsonArray(drinks));
                     cocktailAdapter.notifyDataSetChanged();
-                    Log.i(TAG, "Resu: " + drinks.toString());
-
-
-
-
-//                    JSONObject strDrink = drinks.getJSONObject(0);
-//                    String drink = strDrink.getString("strDrink");
-
-
-                    //Log.d(TAG, "Results: " + drink.toString());
+                    Log.d(TAG, "Results: " + drinks.toString());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -104,4 +94,3 @@ public class RecipesActivity extends AppCompatActivity {
         });
     }
 }
-//test

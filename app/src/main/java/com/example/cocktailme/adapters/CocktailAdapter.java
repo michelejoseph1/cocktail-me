@@ -2,7 +2,6 @@ package com.example.cocktailme.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.cocktailme.R;
-import com.example.cocktailme.RecipesActivity;
-import com.example.cocktailme.models.Ingredients;
+import com.example.cocktailme.RecipeDetailsActivity;
+import com.example.cocktailme.models.Cocktails;
 
 import org.parceler.Parcels;
 
@@ -25,9 +24,9 @@ import java.util.List;
 public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHolder>{
 
     Context context;
-    List<Ingredients> ingredients;
+    List<Cocktails> ingredients;
 
-    public CocktailAdapter(Context context, List<Ingredients> ingredients) {
+    public CocktailAdapter(Context context, List<Cocktails> ingredients) {
         this.context = context;
         this.ingredients = ingredients;
     }
@@ -44,7 +43,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("MovieAdapter", "onBindViewHolder " + position);
         //get the movie at the passed in position
-        Ingredients ingredient = ingredients.get(position);
+        Cocktails ingredient = ingredients.get(position);
         //bind the movie data into the VH
         holder.bind(ingredient);
     }
@@ -75,21 +74,24 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
             // make sure the position is valid, i.e. actually exists in the view
             if (position != RecyclerView.NO_POSITION) {
                 // get the movie at the position, this won't work if the class is static
-                Ingredients ingredient = ingredients.get(position);
+                Cocktails ingredient = ingredients.get(position);
                 // create intent for the new activity
-               Intent intent = new Intent(context, RecipesActivity.class);
+               Intent intent = new Intent(context, RecipeDetailsActivity.class);
                 // serialize the movie using parceler, use its short name as a key
-               intent.putExtra(Ingredients.class.getSimpleName(), Parcels.wrap(ingredient));
+               intent.putExtra(Cocktails.class.getSimpleName(), Parcels.wrap(ingredient));
                 // show the activity
               context.startActivity(intent);
             }
         }
-        public void bind(Ingredients ingredient) {
+        public void bind(Cocktails ingredient) {
             Log.d("CocktailAdapter", "bind reached");
-            title.setText("test");
-           // title.setText(ingredient.getRecipeTitle());
-            //recipeDesc.setText(ingredient.getRecipeDesc());
+            title.setText(ingredient.getRecipeTitle());
+            recipeDesc.setText(ingredient.getRecipeDesc());
+            String imageURL;
 
+
+            imageURL = ingredient.getCocktailPath();
+            Glide.with(context).load(imageURL).into(ivCocktail);
             }
 
         }

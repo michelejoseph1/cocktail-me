@@ -16,10 +16,8 @@ import java.text.ParseException;
 
     public class LoginActivity extends AppCompatActivity {
         public static final String TAG = "LoginActivity";
-        private EditText etUsername;
-        private EditText etPassword;
-        private Button btnLogin;
-        private Button btnSignUp;
+        private EditText etUsername, etPassword;
+        private Button btnLogin, btnSignUp;
 
 
 
@@ -74,13 +72,13 @@ import java.text.ParseException;
         }
 
         private void goMainActivity() {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
+            Intent loginToMain = new Intent(this, MainActivity.class);
+            startActivity(loginToMain);
             finish();
         }
         private void goSignUp() {
-            Intent i = new Intent(this, SignUpActivity.class);
-            startActivity(i);
+            Intent loginToSignUp = new Intent(this, SignUpActivity.class);
+            startActivity(loginToSignUp);
             finish();
         }
     }
