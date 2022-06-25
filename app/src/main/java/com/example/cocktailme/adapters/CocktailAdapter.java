@@ -24,12 +24,14 @@ import java.util.List;
 public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHolder>{
 
     Context context;
-    List<Cocktails> ingredients;
+    List<Cocktails> cocktails;
 
-    public CocktailAdapter(Context context, List<Cocktails> ingredients) {
+
+    public CocktailAdapter(Context context, List<Cocktails> cocktails) {
         this.context = context;
-        this.ingredients = ingredients;
+        this.cocktails = cocktails;
     }
+
     //usually involves inflating a layout from XML and returning the holder
     @NonNull
     @Override
@@ -43,14 +45,14 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("MovieAdapter", "onBindViewHolder " + position);
         //get the movie at the passed in position
-        Cocktails ingredient = ingredients.get(position);
+        Cocktails ingredient = cocktails.get(position);
         //bind the movie data into the VH
         holder.bind(ingredient);
     }
     //returns the total count of items in the list
     @Override
     public int getItemCount() {
-        return ingredients.size();
+        return cocktails.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -74,7 +76,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
             // make sure the position is valid, i.e. actually exists in the view
             if (position != RecyclerView.NO_POSITION) {
                 // get the movie at the position, this won't work if the class is static
-                Cocktails ingredient = ingredients.get(position);
+                Cocktails ingredient = cocktails.get(position);
                 // create intent for the new activity
                Intent intent = new Intent(context, RecipeDetailsActivity.class);
                 // serialize the movie using parceler, use its short name as a key
@@ -83,15 +85,14 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
               context.startActivity(intent);
             }
         }
-        public void bind(Cocktails ingredient) {
+        public void bind(Cocktails cocktail) {
             Log.d("CocktailAdapter", "bind reached");
-            title.setText(ingredient.getRecipeTitle());
-            recipeDesc.setText(ingredient.getRecipeDesc());
+            title.setText(cocktail.getRecipeTitle());
             String imageURL;
-
-
-            imageURL = ingredient.getCocktailPath();
+            imageURL = cocktail.getCocktailPath();
             Glide.with(context).load(imageURL).into(ivCocktail);
+
+
             }
 
         }

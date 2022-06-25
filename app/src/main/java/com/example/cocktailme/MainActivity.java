@@ -14,7 +14,6 @@ import android.widget.MultiAutoCompleteTextView;
 
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.example.cocktailme.models.Constants;
 import com.parse.ParseObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goRecipesActivity() {
-        Intent mainToRecipes = new Intent(this, RecipesActivity.class);
+        Intent mainToRecipes = new Intent(this, CocktailNamesActivity.class);
         mainToRecipes.putExtra("search", insertedIngredients);
         startActivity(mainToRecipes);
         finish();
