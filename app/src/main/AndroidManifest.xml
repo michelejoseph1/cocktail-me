@@ -29,7 +29,7 @@
             android:name=".RecipeDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".RecipesActivity"
+            android:name=".CocktailNamesActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
