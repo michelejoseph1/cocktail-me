@@ -1,11 +1,17 @@
 package com.example.cocktailme;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
@@ -13,21 +19,26 @@ import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cocktailme.adapters.CocktailAdapter;
 import com.example.cocktailme.models.Cocktails;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Headers;
 
-public class RecipesActivity extends AppCompatActivity {
+public class CocktailNamesActivity extends AppCompatActivity {
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/filter.php";
-    public static final String TAG = "RecipesActivity";
+    public static final String TAG = "CocktailNamesActivity";
     public AsyncHttpClient client;
     String insertedIngredients;
+    String cocktailTitle;
+    int cocktailID;
+    final FragmentManager fragmentManager = getSupportFragmentManager();
+    private BottomNavigationView bottomNavigationView;
+
 
 
     @Override
@@ -36,14 +47,47 @@ public class RecipesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
 
         RecyclerView rvRecipes = findViewById(R.id.rvRecipes);
-        ArrayList ingredients = new ArrayList<>();
-
-
-
+        Cocktails cocktail = new Cocktails();
+        cocktailTitle = cocktail.getRecipeTitle();
+        cocktailID = cocktail.getID();
+        Log.d("checking to confirm ID", "Results: " + cocktailID);
         client = new AsyncHttpClient();
         insertedIngredients = getIntent().getStringExtra("search");
         getRecipesMethod(insertedIngredients);
+       // goRecipeDetails();
+
+
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment fragment;
+                switch (menuItem.getItemId()) {
+                    case R.id.action_home:
+                        //TODO: update fragment
+                        // Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
+
+                        break;
+                    case R.id.action_compose:
+                        //Toast.makeText(MainActivity.this, "Compose!", Toast.LENGTH_SHORT).show();
+
+                        break;
+                    case R.id.action_profile:
+
+                    default:
+
+                        //Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
+                        //fragment= new ProfileFragment();
+                        break;
+                }
+                return true;
+            }
+        });
+        // Set default selection
+        bottomNavigationView.setSelectedItemId(R.id.action_home);
     }
+
 
     public void getRecipesMethod(String insertedIngredients) {
         RequestHeaders headers = new RequestHeaders();
@@ -75,7 +119,7 @@ public class RecipesActivity extends AppCompatActivity {
                     rvRecipes.setAdapter(cocktailAdapter);
 
                     //set the layout manager on the recycler vie
-                    rvRecipes.setLayoutManager(new LinearLayoutManager(RecipesActivity.this));
+                    rvRecipes.setLayoutManager(new LinearLayoutManager(CocktailNamesActivity.this));
 
 
                     JSONArray drinks = jsonObject.getJSONArray("drinks");
@@ -92,5 +136,11 @@ public class RecipesActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailure" + statusCode + response);
             }
         });
+    }
+    private void goRecipeDetails() {
+        Intent cocktailNamestoRecipes = new Intent(this, RecipeDetailsActivity.class);
+        cocktailNamestoRecipes.putExtra("ID", cocktailID);
+        startActivity(cocktailNamestoRecipes);
+        finish();
     }
 }
