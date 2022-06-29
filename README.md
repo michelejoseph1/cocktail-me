@@ -8,13 +8,13 @@
 
 ## Overview
 ### Description
-CocktailMe allows users to insert a list of ingredients they have on hand and be returned a list of cocktail recipes they can create using them.  
+CocktailMe allows users to insert a list of ingredients they have on hand and be returned a list of cocktail recipes they can create using them.
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
 - **Category:** Food/Drink
 - **Mobile:** App has edit and view components
-- **Story:** Allows users to insert a list of ingredients they have on hand and be returned a list of cocktail recipes they can create using them  
+- **Story:** Allows users to insert a list of ingredients they have on hand and be returned a list of cocktail recipes they can create using them
 - **Market:** Anyone that enjoys mocktails/cocktails could enjoy using this app.
 - **Habit:** Users can explore endless cocktail recipes according to the ingredients they input whenever they want.
 - **Scope:** Could be expanded by introducing social components (can post when you make a recipe/upload a picture of it, etc.)
@@ -37,12 +37,12 @@ CocktailMe allows users to insert a list of ingredients they have on hand and be
 
 ### 2. Screen Archetypes
 
-* Login 
+* Login
 * Register - User signs up or logs into their account
-   * Upon Download/Reopening of the application, the user is prompted to log in to gain access to their profile information to be properly matched with another person. 
+   * Upon Download/Reopening of the application, the user is prompted to log in to gain access to their profile information to be properly matched with another person.
 * Ingredient insertion screen - User inputs ingredients they have on-hand to use for cocktail
    * Upon inserting ingredient options users are matched with potential recipes
-* Profile Screen 
+* Profile Screen
    * Allows user to save their favorite recipes
 * Recipe selection screen
    * Allows user to get a full-screen description of the recipe
@@ -61,9 +61,9 @@ Optional:
 * Discover (Top Recipes)
 
 **Flow Navigation** (Screen to Screen)
-* Forced Log-in -> Account creation if no log in is available
+* Forced Log-in -> Account creation, if no log in is available
 * Ingredient insertion -> Jumps to recipe list
-* Profile -> Text field to be modified. 
+* Profile -> Text field to be modified.
 * Settings -> Toggle settings
 
 
@@ -73,7 +73,7 @@ Optional:
 ### [BONUS] Digital Wireframes & Mockups
 <img width="481" alt="Screen Shot 2022-06-16 at 9 27 04 AM" src="https://user-images.githubusercontent.com/66920319/174119898-7f1c63f9-9868-489c-a1ac-bafe21ae1271.png">
 
-## Schema 
+## Schema
 ### Models
 #### Cocktail
 
