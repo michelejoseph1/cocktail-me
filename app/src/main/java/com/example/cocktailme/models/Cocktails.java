@@ -24,11 +24,7 @@ public class Cocktails {
     public Cocktails(JSONObject jsonObject) throws JSONException {
         title = jsonObject.getString("strDrink");
         cocktailPath = jsonObject.getString("strDrinkThumb");
-<<<<<<< HEAD
         cocktailID = jsonObject.getInt("idDrink");
-=======
-       // cocktailID = jsonObject.getString("")
->>>>>>> 5846434 (add navigation bar)
     }
 
     public static List<Cocktails> fromJsonArray(JSONArray cocktailJsonArray) throws JSONException {
@@ -53,8 +49,3 @@ public class Cocktails {
     }
 
 }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 5846434 (add navigation bar)

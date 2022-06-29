@@ -1,31 +1,8 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 package com.example.cocktailme.models;
 
 public class Constants {
 
     public static final String[] INGREDIENT_LIST = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
-<<<<<<< HEAD
-=======
-package com.example.cocktailme;
-
-public class Constants {
-
-    String[] fewRandomSuggestedText = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
->>>>>>> 6f10ccf (fixing after PR comments)
-=======
-package com.example.cocktailme.models;
-
-public class Constants {
-
-<<<<<<< HEAD
-    public static String[] fewRandomSuggestedText = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
->>>>>>> 72cc745 (fixing after PR comments)
-=======
-    public static String[] ingredient_list = {"Vodka", "Gin", "Rum", "Tequila", "Scotch",
->>>>>>> 3f0798d (changes ingredient list variable name)
-=======
->>>>>>> 2078a8e (fixing PR comments)
             "Absolut Kurant", "Absolut Peppar", "Absolut Vodka", "Advocaat", "Aejo Rum",
             "Aftershock", "Agave Syrup", "Ale", "Allspice", "Almond Flavoring", "Almond", "Amaretto", "Angelica Root",
             "Angostura Bitters", "Anis", "Anise", "Anisette", "Aperol", "Apfelkorn", "Apple Brandy",
@@ -102,6 +79,5 @@ public class Constants {
             "Olive Brine","Pineapple Syrup","St. Germain","Lavender","Whiskey","Whisky", "Pomegranate juice",
             "Watermelon","Chareau","Cinnamon Whisky","Red Bull","Diet Coke", "Rosemary Syrup","Figs", "Thyme",
             "Blood Orange","Amaro Montenegro","Ruby Port","Rose"
-
     };
 }
