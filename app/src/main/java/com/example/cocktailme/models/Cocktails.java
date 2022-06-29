@@ -2,6 +2,9 @@ package com.example.cocktailme.models;
 
 
 import android.util.Log;
+import android.widget.ImageView;
+
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,32 +12,34 @@ import org.json.JSONObject;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Parcel
-public class Cocktails {
+public class Ingredients {
     String title;
+    String recDesc;
     String cocktailPath;
-    int cocktailID;
-    public static final String TAG = "Cocktails";
+    public static final String TAG = "Ingredients";
 
-    public Cocktails() {
+    public Ingredients() {
     }
 
-    public Cocktails(JSONObject jsonObject) throws JSONException {
+    public Ingredients(JSONObject jsonObject) throws JSONException {
         title = jsonObject.getString("strDrink");
         cocktailPath = jsonObject.getString("strDrinkThumb");
-       // cocktailID = jsonObject.getString("")
-    }
+        //recDesc = jsonObject.getString("strInstructions");
+        Log.d(TAG, "hi " + recDesc);
 
-    public static List<Cocktails> fromJsonArray(JSONArray cocktailJsonArray) throws JSONException {
-        List<Cocktails> cocktailList = new ArrayList<>();
-        for (int cocktail = 0; cocktail < cocktailJsonArray.length(); cocktail++) {
-            cocktailList.add(new Cocktails(cocktailJsonArray.getJSONObject(cocktail)));
+
+    }
+    public static List<Ingredients> fromJsonArray(JSONArray recipeJsonArray) throws JSONException {
+        List<Ingredients> ingredients = new ArrayList<>();
+        for (int i = 0; i < recipeJsonArray.length(); i++) {
+            ingredients.add(new Ingredients(recipeJsonArray.getJSONObject(i)));
         }
-        return cocktailList;
+        return ingredients;
     }
-
 
     public String getCocktailPath() {
         return String.format(cocktailPath);
@@ -44,10 +49,9 @@ public class Cocktails {
     public String getRecipeTitle() {
         return title;
     }
-    public int getID() {
-        return cocktailID;
+
+    public String getRecipeDesc() {
+        return recDesc;
     }
-
 }
-
 
