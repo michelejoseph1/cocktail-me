@@ -18,6 +18,10 @@ import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cocktailme.adapters.CocktailAdapter;
+//import com.example.cocktailme.fragments.HomeFragment;
+import com.example.cocktailme.fragments.HomeFragment;
+import com.example.cocktailme.fragments.ProfileFragment;
+import com.example.cocktailme.fragments.SettingsFragment;
 import com.example.cocktailme.models.Cocktails;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -40,7 +44,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +56,7 @@ public class CocktailNamesActivity extends AppCompatActivity {
         Log.d("checking to confirm ID", "Results: " + cocktailID);
         client = new AsyncHttpClient();
         insertedIngredients = getIntent().getStringExtra("search");
-        getRecipesMethod(insertedIngredients);
+       // getRecipesMethod(insertedIngredients);
        // goRecipeDetails();
 
 
@@ -64,23 +67,28 @@ public class CocktailNamesActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment fragment;
                 switch (menuItem.getItemId()) {
-                    case R.id.action_home:
-                        //TODO: update fragment
-                        // Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
+                    //case R.id.action_home:
+                       //HomeFragment x = new HomeFragment();
 
-                        break;
-                    case R.id.action_compose:
-                        //Toast.makeText(MainActivity.this, "Compose!", Toast.LENGTH_SHORT).show();
+
+                       // break;
+                    case R.id.action_settings:
+                        fragment = new SettingsFragment();
 
                         break;
                     case R.id.action_profile:
+                        fragment = new ProfileFragment();
+break;
 
                     default:
-
-                        //Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
-                        //fragment= new ProfileFragment();
+                        HomeFragment tempFragment = new HomeFragment();
+       Bundle bundle = new Bundle();
+        bundle.putString("search", insertedIngredients);
+       tempFragment.setArguments(bundle);
+                        fragment = tempFragment;
                         break;
                 }
+                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
                 return true;
             }
         });
@@ -99,14 +107,21 @@ public class CocktailNamesActivity extends AppCompatActivity {
         RecyclerView rvRecipes = findViewById(R.id.rvRecipes);
         ArrayList ingredients = new ArrayList<>();
 
-        //create adapter
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        rvRecipes.setLayoutManager(manager);
+        rvRecipes.setHasFixedSize(true);
         CocktailAdapter cocktailAdapter = new CocktailAdapter(this, ingredients);
-
-        //set adapter on the recycler view
         rvRecipes.setAdapter(cocktailAdapter);
 
+
+
+
+
+        //create adapter
+
+        //set adapter on the recycler view
+
         //set the layout manager on the recycler vie
-        rvRecipes.setLayoutManager(new LinearLayoutManager(this));
 
 
         client.get(INGREDIENT_LIST_URL, headers, params, new JsonHttpResponseHandler() {
@@ -116,10 +131,11 @@ public class CocktailNamesActivity extends AppCompatActivity {
                 JSONObject jsonObject = json.jsonObject;
 
                 try {
-                    rvRecipes.setAdapter(cocktailAdapter);
+                    RecyclerView rvRecipes = findViewById(R.id.rvRecipes);
+                    ArrayList ingredients = new ArrayList<>();
 
-                    //set the layout manager on the recycler vie
-                    rvRecipes.setLayoutManager(new LinearLayoutManager(CocktailNamesActivity.this));
+                    rvRecipes.setAdapter(cocktailAdapter);
+                    //rvRecipes.setLayoutManager(new LinearLayoutManager(CocktailNamesActivity.this));
 
 
                     JSONArray drinks = jsonObject.getJSONArray("drinks");

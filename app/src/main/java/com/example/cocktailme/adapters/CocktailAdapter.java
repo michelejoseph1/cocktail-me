@@ -91,8 +91,6 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
             String imageURL;
             imageURL = cocktail.getCocktailPath();
             Glide.with(context).load(imageURL).into(ivCocktail);
-
-
             }
 
         }

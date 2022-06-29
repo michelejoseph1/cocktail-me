@@ -79,6 +79,5 @@ public class Constants {
             "Olive Brine","Pineapple Syrup","St. Germain","Lavender","Whiskey","Whisky", "Pomegranate juice",
             "Watermelon","Chareau","Cinnamon Whisky","Red Bull","Diet Coke", "Rosemary Syrup","Figs", "Thyme",
             "Blood Orange","Amaro Montenegro","Ruby Port","Rose"
-
     };
 }

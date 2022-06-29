@@ -24,7 +24,7 @@ public class Cocktails {
     public Cocktails(JSONObject jsonObject) throws JSONException {
         title = jsonObject.getString("strDrink");
         cocktailPath = jsonObject.getString("strDrinkThumb");
-       // cocktailID = jsonObject.getString("")
+        cocktailID = jsonObject.getInt("idDrink");
     }
 
     public static List<Cocktails> fromJsonArray(JSONArray cocktailJsonArray) throws JSONException {

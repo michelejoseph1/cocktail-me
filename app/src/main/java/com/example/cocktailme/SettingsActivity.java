@@ -1,6 +1,7 @@
 package com.example.cocktailme;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import com.parse.ParseUser;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    final FragmentManager fragmentManager = getSupportFragmentManager();
     Button btnLogout;
 
     @Override

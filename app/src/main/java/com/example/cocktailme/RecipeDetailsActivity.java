@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
@@ -29,9 +31,10 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/lookup.php";
     Cocktails cocktail;
-    TextView recipeTitle, recipeInstructions;
+    TextView recipeTitle, recipeInstructions, measurementsText;
     public AsyncHttpClient client;
     int cocktailID;
+    ImageView cocktailImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +43,19 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         recipeTitle = findViewById(R.id.recipeTitle);
         recipeInstructions = findViewById(R.id.recipeInstructions);
-
+        measurementsText = findViewById(R.id.measurementsText);
+        cocktailImage = findViewById(R.id.cocktailImage);
         cocktail = (Cocktails) Parcels.unwrap(getIntent().getParcelableExtra(Cocktails.class.getSimpleName()));
 
         recipeTitle.setText(cocktail.getRecipeTitle());
 
         client = new AsyncHttpClient();
-        cocktailID = getIntent().getIntExtra("ID", 0);
+
+        cocktailID = cocktail.getID();
+        //cocktailID = getIntent().getIntExtra("ID", 0);
+
+        // Call getInstructions to
+        getInstructions(cocktailID);
 
     }
     public void getInstructions(int cocktailID) {
@@ -66,10 +75,24 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     public void onSuccess(int statusCode, Headers headers, JSON json) {
                         JSONObject jsonObject = json.jsonObject;
                         try {
-                            JSONArray instructions = jsonObject.getJSONArray("instructions");
-                            ingredients.addAll(Cocktails.fromJsonArray(instructions));
-                            Log.d("RecipeDetails", "Results: " + instructions.toString());
+                            JSONArray drinks = jsonObject.getJSONArray("drinks");
+                            String instructions = drinks.getJSONObject(0).getString("strInstructions");
+                            String measurements =
+                                    drinks.getJSONObject(0).getString("strMeasure1") +
+                                    drinks.getJSONObject(0).getString("strIngredient1") +
+                                    drinks.getJSONObject(0).getString("strMeasure2") +
+                                    drinks.getJSONObject(0).getString("strIngredient2") +
+                                    drinks.getJSONObject(0).getString("strMeasure3") +
+                                    drinks.getJSONObject(0).getString("strIngredient3");
 
+                                    recipeInstructions.setText(instructions);
+                                    measurementsText.setText(measurements);
+                           // ingredients.addAll(Cocktails.fromJsonArray(drinks));
+                            Log.d("RecipeDetails", "Results: " + instructions.toString());
+                            String imageURL;
+                            imageURL = cocktail.getCocktailPath();
+                            Glide.with(RecipeDetailsActivity.this).load(imageURL).override(500, 500)
+                                    .fitCenter().into(cocktailImage);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
