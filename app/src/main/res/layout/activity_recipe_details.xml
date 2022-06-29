@@ -7,30 +7,10 @@
     tools:context=".RecipeDetailsActivity">
 
     <TextView
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 291df1f668487120428e8d07993cdd5f732e96b8
         android:id="@+id/recipeTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Recipe Title"
-<<<<<<< HEAD
-=======
-        android:id="@+id/recTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Movie Title"
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
-=======
-        android:id="@+id/recipeTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Recipe Title"
->>>>>>> 2078a8e (fixing PR comments)
-=======
->>>>>>> 291df1f668487120428e8d07993cdd5f732e96b8
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,19 +18,7 @@
 
 
     <TextView
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         android:id="@+id/recipeInstructions"
-=======
-        android:id="@+id/recDesc"
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
-=======
-        android:id="@+id/recipeInstructions"
->>>>>>> 2078a8e (fixing PR comments)
-=======
-        android:id="@+id/recipeInstructions"
->>>>>>> 291df1f668487120428e8d07993cdd5f732e96b8
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -58,17 +26,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
-=======
-        app:layout_constraintTop_toBottomOf="@+id/recTitle" />
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
-=======
-        app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
->>>>>>> 2078a8e (fixing PR comments)
-=======
-        app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
->>>>>>> 291df1f668487120428e8d07993cdd5f732e96b8
 </androidx.constraintlayout.widget.ConstraintLayout>
