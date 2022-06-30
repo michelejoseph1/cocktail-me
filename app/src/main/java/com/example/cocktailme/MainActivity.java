@@ -1,8 +1,6 @@
 package com.example.cocktailme;
 
 import static com.example.cocktailme.models.Constants.INGREDIENT_LIST;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +11,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
-//import com.example.cocktailme.fragments.HomeFragment;
-import com.example.cocktailme.fragments.SettingsFragment;
 import com.parse.ParseObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -86,29 +83,10 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    //    private void goRecipesActivity() {
-////        Intent mainToRecipes = new Intent(this, CocktailNamesActivity.class);
-////        mainToRecipes.putExtra("search", insertedIngredients);
-////        startActivity(mainToRecipes);
-////        finish();
-//
-//        HomeFragment fragment = new HomeFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putString("search", insertedIngredients);
-//        fragment.setArguments(bundle);
-//    }
     private void goRecipesActivity() {
         Intent mainToRecipes = new Intent(this, CocktailNamesActivity.class);
         mainToRecipes.putExtra("search", insertedIngredients);
         startActivity(mainToRecipes);
         finish();
-//        Intent mainToRecipes = new Intent(this, CocktailNamesActivity.class);
-//        SettingsFragment fragment = new SettingsFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putString("search", insertedIngredients);
-//        fragment.setArguments(bundle);
-//        startActivity(mainToRecipes);
-//        finish();
-
     }
 }

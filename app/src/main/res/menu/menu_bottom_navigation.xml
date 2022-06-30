@@ -8,7 +8,7 @@
         android:title="Home"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_compose"
+        android:id="@+id/action_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="Settings"
         app:showAsAction="always" />

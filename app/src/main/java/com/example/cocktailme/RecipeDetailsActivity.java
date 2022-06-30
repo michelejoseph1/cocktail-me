@@ -1,29 +1,23 @@
 package com.example.cocktailme;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.example.cocktailme.adapters.CocktailAdapter;
 import com.example.cocktailme.models.Cocktails;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
-
-import java.util.ArrayList;
 
 import okhttp3.Headers;
 
@@ -35,6 +29,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     public AsyncHttpClient client;
     int cocktailID;
     ImageView cocktailImage;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +48,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         client = new AsyncHttpClient();
 
         cocktailID = cocktail.getID();
-        //cocktailID = getIntent().getIntExtra("ID", 0);
-
-        // Call getInstructions to
         getInstructions(cocktailID);
 
     }
@@ -65,8 +58,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         headers.put("X-RapidAPI-Key", "c13dadbdfdmshb5f916990392087p1e49ccjsnae8ca04335f1");
         headers.put("X-RapidAPI-Host", "the-cocktail-db.p.rapidapi.com");
 
-        ArrayList ingredients = new ArrayList<>();
-
         client.get(INGREDIENT_LIST_URL,
                 headers,
                 params,
@@ -74,20 +65,14 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON json) {
                         JSONObject jsonObject = json.jsonObject;
+
                         try {
                             JSONArray drinks = jsonObject.getJSONArray("drinks");
                             String instructions = drinks.getJSONObject(0).getString("strInstructions");
-                            String measurements =
-                                    drinks.getJSONObject(0).getString("strMeasure1") +
-                                    drinks.getJSONObject(0).getString("strIngredient1") +
-                                    drinks.getJSONObject(0).getString("strMeasure2") +
-                                    drinks.getJSONObject(0).getString("strIngredient2") +
-                                    drinks.getJSONObject(0).getString("strMeasure3") +
-                                    drinks.getJSONObject(0).getString("strIngredient3");
-
-                                    recipeInstructions.setText(instructions);
-                                    measurementsText.setText(measurements);
-                           // ingredients.addAll(Cocktails.fromJsonArray(drinks));
+                            String measurements = getMeasurements(drinks);
+                            recipeInstructions.setText(instructions);
+                            measurementsText.setText(measurements);
+                            Log.d("RecipeDetails", "Results: " + measurements.toString());
                             Log.d("RecipeDetails", "Results: " + instructions.toString());
                             String imageURL;
                             imageURL = cocktail.getCocktailPath();
@@ -107,4 +92,20 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     }
                 });
     }
+    public String getMeasurements(JSONArray drinks) throws JSONException {
+        String measurements = "";
+        for (int i = 1; i < 16; i++) {
+            String curr = "strIngredient" + i;
+            String measure = "strMeasure" + i;
+            if (drinks.getJSONObject(0).getString(curr) != null && drinks.getJSONObject(0).getString(measure) != null
+
+            ){
+                measurements += drinks.getJSONObject(0).getString(measure) + " " + drinks.getJSONObject(0).getString(curr) +"\n ";
+            } else {
+               measurements = "Measurements not found";
+            }
+        }
+        return measurements;
+    }
 }
+
