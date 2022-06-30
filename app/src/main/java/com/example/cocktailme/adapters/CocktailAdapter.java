@@ -27,6 +27,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     List<Cocktails> cocktails;
 
 
+
     public CocktailAdapter(Context context, List<Cocktails> cocktails) {
         this.context = context;
         this.cocktails = cocktails;
@@ -81,7 +82,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
                Intent intent = new Intent(context, RecipeDetailsActivity.class);
                 // serialize the movie using parceler, use its short name as a key
                intent.putExtra(Cocktails.class.getSimpleName(), Parcels.wrap(ingredient));
-                // show the activity
+
               context.startActivity(intent);
             }
         }
