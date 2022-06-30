@@ -9,15 +9,19 @@
     <TextView
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         android:id="@+id/recipeTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Recipe Title"
 =======
+=======
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
         android:id="@+id/recTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Movie Title"
+<<<<<<< HEAD
 >>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
 =======
         android:id="@+id/recipeTitle"
@@ -25,6 +29,8 @@
         android:layout_height="wrap_content"
         android:text="Recipe Title"
 >>>>>>> 2078a8e (fixing PR comments)
+=======
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +40,7 @@
     <TextView
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         android:id="@+id/recipeInstructions"
 =======
         android:id="@+id/recDesc"
@@ -41,6 +48,9 @@
 =======
         android:id="@+id/recipeInstructions"
 >>>>>>> 2078a8e (fixing PR comments)
+=======
+        android:id="@+id/recDesc"
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -50,6 +60,7 @@
         app:layout_constraintStart_toStartOf="parent"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
 =======
         app:layout_constraintTop_toBottomOf="@+id/recTitle" />
@@ -57,4 +68,7 @@
 =======
         app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
 >>>>>>> 2078a8e (fixing PR comments)
+=======
+        app:layout_constraintTop_toBottomOf="@+id/recTitle" />
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
 </androidx.constraintlayout.widget.ConstraintLayout>

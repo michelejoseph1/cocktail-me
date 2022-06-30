@@ -1,6 +1,7 @@
 package com.example.cocktailme;
 
 import androidx.appcompat.app.AppCompatActivity;
+<<<<<<< HEAD
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,12 +36,28 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     public AsyncHttpClient client;
     int cocktailID;
     ImageView cocktailImage;
+=======
+
+import android.os.Bundle;
+import android.widget.TextView;
+
+import com.example.cocktailme.models.Ingredients;
+
+import org.parceler.Parcels;
+
+public class RecipeDetailsActivity extends AppCompatActivity {
+
+    Ingredients ingredient;
+    TextView recTitle;
+    TextView recDesc;
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
 
+<<<<<<< HEAD
         recipeTitle = findViewById(R.id.recipeTitle);
         recipeInstructions = findViewById(R.id.recipeInstructions);
         measurementsText = findViewById(R.id.measurementsText);
@@ -108,3 +125,14 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 });
     }
 }
+=======
+        recTitle = findViewById(R.id.recTitle);
+        recDesc = findViewById(R.id.recDesc);
+
+        ingredient = (Ingredients) Parcels.unwrap(getIntent().getParcelableExtra(Ingredients.class.getSimpleName()));
+
+        recTitle.setText(ingredient.getRecipeTitle());
+
+    }
+}
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide)

@@ -11,7 +11,10 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2635416666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28412078857421874" />
         <entry key="app/src/main/res/layout/activity_recipe_details.xml" value="0.32037037037037036" />
+<<<<<<< HEAD
         <entry key="app/src/main/res/layout/activity_recipe_instructions.xml" value="0.32037037037037036" />
+=======
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
         <entry key="app/src/main/res/layout/activity_recipes.xml" value="0.2994791666666667" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.2994791666666667" />
         <entry key="app/src/main/res/layout/activity_settings2.xml" value="0.1" />

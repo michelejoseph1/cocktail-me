@@ -137,10 +137,13 @@ public class CocktailNamesActivity extends AppCompatActivity {
             }
         });
     }
+<<<<<<< HEAD:app/src/main/java/com/example/cocktailme/CocktailNamesActivity.java
     private void goRecipeDetails() {
         Intent cocktailNamestoRecipes = new Intent(this, RecipeDetailsActivity.class);
         cocktailNamestoRecipes.putExtra("ID", cocktailID);
         startActivity(cocktailNamestoRecipes);
         finish();
     }
+=======
+>>>>>>> c68224e (adds cocktail names to RV and adds images with glide):app/src/main/java/com/example/cocktailme/RecipesActivity.java
 }
