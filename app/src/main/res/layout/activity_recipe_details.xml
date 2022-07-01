@@ -6,69 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".RecipeDetailsActivity">
 
+
     <TextView
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         android:id="@+id/recipeTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Recipe Title"
-=======
-=======
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
-        android:id="@+id/recTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Movie Title"
-<<<<<<< HEAD
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
-=======
-        android:id="@+id/recipeTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Recipe Title"
->>>>>>> 2078a8e (fixing PR comments)
-=======
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         android:id="@+id/recipeInstructions"
-=======
-        android:id="@+id/recDesc"
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
-=======
-        android:id="@+id/recipeInstructions"
->>>>>>> 2078a8e (fixing PR comments)
-=======
-        android:id="@+id/recDesc"
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_width="408dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="56dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
-=======
-        app:layout_constraintTop_toBottomOf="@+id/recTitle" />
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
-=======
-        app:layout_constraintTop_toBottomOf="@+id/recipeTitle" />
->>>>>>> 2078a8e (fixing PR comments)
-=======
-        app:layout_constraintTop_toBottomOf="@+id/recTitle" />
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
+        app:layout_constraintTop_toBottomOf="@+id/cocktailImage" />
+
+    <TextView
+        android:id="@+id/measurementsText"
+        android:layout_width="409dp"
+        android:layout_height="171dp"
+        android:layout_marginTop="200dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeInstructions" />
+
+    <ImageView
+        android:id="@+id/cocktailImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeTitle"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

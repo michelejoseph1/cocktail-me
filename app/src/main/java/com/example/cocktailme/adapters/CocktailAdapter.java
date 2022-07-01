@@ -15,12 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.cocktailme.R;
 import com.example.cocktailme.RecipeDetailsActivity;
-<<<<<<< HEAD
 import com.example.cocktailme.models.Cocktails;
-=======
-import com.example.cocktailme.RecipesActivity;
-import com.example.cocktailme.models.Ingredients;
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
 
 import org.parceler.Parcels;
 
@@ -30,6 +25,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
 
     Context context;
     List<Cocktails> cocktails;
+
 
 
     public CocktailAdapter(Context context, List<Cocktails> cocktails) {
@@ -63,13 +59,13 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title;
-        TextView recDesc;
+        TextView recipeDesc;
         ImageView ivCocktail;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             title = itemView.findViewById(R.id.title);
-            recDesc = itemView.findViewById(R.id.recipeDesc);
+            recipeDesc = itemView.findViewById(R.id.recipeDesc);
             ivCocktail = itemView.findViewById(R.id.ivCocktail);
             itemView.setOnClickListener(this);
         }
@@ -86,24 +82,15 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
                Intent intent = new Intent(context, RecipeDetailsActivity.class);
                 // serialize the movie using parceler, use its short name as a key
                intent.putExtra(Cocktails.class.getSimpleName(), Parcels.wrap(ingredient));
-                // show the activity
+
               context.startActivity(intent);
             }
         }
         public void bind(Cocktails cocktail) {
             Log.d("CocktailAdapter", "bind reached");
-<<<<<<< HEAD
             title.setText(cocktail.getRecipeTitle());
             String imageURL;
             imageURL = cocktail.getCocktailPath();
-=======
-            title.setText(ingredient.getRecipeTitle());
-            recDesc.setText(ingredient.getRecipeDesc());
-            String imageURL;
-
-
-            imageURL = ingredient.getCocktailPath();
->>>>>>> c68224e (adds cocktail names to RV and adds images with glide)
             Glide.with(context).load(imageURL).into(ivCocktail);
             }
 
