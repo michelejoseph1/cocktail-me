@@ -1,30 +1,24 @@
 package com.example.cocktailme.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.example.cocktailme.CocktailNamesActivity;
 import com.example.cocktailme.R;
-import com.example.cocktailme.RecipeDetailsActivity;
 import com.example.cocktailme.adapters.CocktailAdapter;
 import com.example.cocktailme.models.Cocktails;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,8 +28,8 @@ import java.util.ArrayList;
 
 import okhttp3.Headers;
 
-public class HomeFragment extends Fragment {
 
+public class HomeFragment extends Fragment {
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/filter.php";
     public AsyncHttpClient client;
     String insertedIngredients;
@@ -56,14 +50,13 @@ public class HomeFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Add the following lines to create RecyclerView
         return view;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -76,15 +69,12 @@ public class HomeFragment extends Fragment {
         rvRecipes.setAdapter(cocktailAdapter);
 
 
-
         Cocktails cocktail = new Cocktails();
         cocktailTitle = cocktail.getRecipeTitle();
         cocktailID = cocktail.getID();
         Log.d("checking to confirm ID", "Results: " + cocktailID);
         client = new AsyncHttpClient();
         insertedIngredients = this.getArguments().getString("search");
-
-
 
 
         RequestHeaders headers = new RequestHeaders();
@@ -114,6 +104,7 @@ public class HomeFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 Log.d(TAG, "onFailure" + statusCode + response);

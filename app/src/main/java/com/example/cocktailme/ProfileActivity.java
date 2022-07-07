@@ -20,7 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ProfileActivity extends AppCompatActivity implements Config {
+public class ProfileActivity extends AppCompatActivity {
 
     EditText user, email, fname, lname;
     String user1, email1, fname1, lname1, reply, code;

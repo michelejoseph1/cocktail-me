@@ -8,18 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.example.cocktailme.fragments.HomeFragment;
 import com.example.cocktailme.fragments.ProfileFragment;
+import com.example.cocktailme.fragments.HomeFragment;
 import com.example.cocktailme.fragments.SettingsFragment;
 import com.example.cocktailme.models.Cocktails;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CocktailNamesActivity extends AppCompatActivity {
-    public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/filter.php";
-    public static final String TAG = "CocktailNamesActivity";
     public AsyncHttpClient client;
     String insertedIngredients;
     String cocktailTitle;
@@ -32,8 +29,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
-
-        RecyclerView rvRecipes = findViewById(R.id.rvRecipes);
         Cocktails cocktail = new Cocktails();
         cocktailTitle = cocktail.getRecipeTitle();
         cocktailID = cocktail.getID();

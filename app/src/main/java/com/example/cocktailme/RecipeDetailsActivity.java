@@ -37,9 +37,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
 
-        recipeTitle = findViewById(R.id.recipeTitle);
-        recipeInstructions = findViewById(R.id.recipeInstructions);
-        measurementsText = findViewById(R.id.measurementsText);
+        recipeTitle = findViewById(R.id.detailRecipeTitle);
+        recipeInstructions = findViewById(R.id.instructionTitle);
+        measurementsText = findViewById(R.id.detailRecipeInstruction);
         cocktailImage = findViewById(R.id.cocktailImage);
         cocktail = (Cocktails) Parcels.unwrap(getIntent().getParcelableExtra(Cocktails.class.getSimpleName()));
 
@@ -72,7 +72,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                             String measurements = getMeasurements(drinks);
                             recipeInstructions.setText(instructions);
                             measurementsText.setText(measurements);
-                            Log.d("RecipeDetails", "Results: " + measurements.toString());
+                            //Log.d("RecipeDetails", "Results: " + measurements.toString());
                             Log.d("RecipeDetails", "Results: " + instructions.toString());
                             String imageURL;
                             imageURL = cocktail.getCocktailPath();
