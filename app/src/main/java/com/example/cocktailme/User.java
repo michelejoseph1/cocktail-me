@@ -1,7 +1,5 @@
 package com.example.cocktailme;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +42,7 @@ public class User extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL(Config.api_url1);                                                  // new url object is created
+                    URL url = new URL(Config.USER_URL);                                                  // new url object is created
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();                  // HTTP connection object is created
                     BufferedReader rd = new BufferedReader(new InputStreamReader(
                             conn.getInputStream()));

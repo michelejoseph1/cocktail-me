@@ -55,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity implements Config {
                 @Override
                 public void run() {
                     try {
-                        URL url = new URL (Config.api_url2);
+                        URL url = new URL (Config.ADD_URL);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         conn.setRequestMethod("POST");
                         conn.setRequestProperty("Content-Type", "application/json; utf-8");
