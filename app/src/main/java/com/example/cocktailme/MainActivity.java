@@ -1,7 +1,6 @@
 package com.example.cocktailme;
 
 import static com.example.cocktailme.models.Constants.INGREDIENT_LIST;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +11,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.example.cocktailme.models.Constants;
+import com.example.cocktailme.db.DatabaseHelper;
 import com.parse.ParseObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton settingsButton;
     Button generateButton;
     String insertedIngredients;
+    private DatabaseHelper db;
+
 
 
 
@@ -33,13 +35,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
+        initDatabase();
+    }
 
+    private void initDatabase() {
+        db = new DatabaseHelper(this);
+        if (!db.checkForTableExists("recipes")) {
+            db.resetTable();
+        }
 
         generateButton = findViewById(R.id.generateButton);
         generateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 insertedIngredients = multiAutoCompleteTextViewDefault.getText().toString();
                 goRecipesActivity();
 
@@ -59,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> randomArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
                 INGREDIENT_LIST);
         multiAutoCompleteTextViewDefault.setAdapter(randomArrayAdapter);
+        Log.d(TAG, "adapter set");
 
         multiAutoCompleteTextViewDefault.setThreshold(1);
 
@@ -86,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goRecipesActivity() {
-        Intent mainToRecipes = new Intent(this, RecipesActivity.class);
+        Intent mainToRecipes = new Intent(this, CocktailNamesActivity.class);
         mainToRecipes.putExtra("search", insertedIngredients);
         startActivity(mainToRecipes);
         finish();

@@ -7,4 +7,18 @@
 </string>
     <string name="back4app_client_key">7ydoiSJw3lE9l2JJaeMT3IpsUgRH130RL5dm4nb8</string>
     <string name="desc" />
+
+
+    <string name="bottomTitle1">Popular</string>
+    <string name="bottomTitle2">Search</string>
+    <string name="bottomTitle3">My Recipes</string>
+    <string name="tab1Title">Popular</string>
+    <string name="tab2Title">Search</string>
+    <string name="tab3Title">My Recipes</string>
+
+    <string name="chooser">Share this recipeModel with...</string>
+    <string name="notification">Battery is low, music stopped playing!</string>
+    <string name="title">"BuzzBuzz: "</string>
+    <string name="alcoholic">Alcoholic</string>
+    <string name="nonAlcoholic">Non-alcoholic</string>
 </resources>
