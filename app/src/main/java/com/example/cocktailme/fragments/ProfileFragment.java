@@ -37,8 +37,8 @@ import java.net.URL;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
-    EditText user, email, fname, lname;
-    String user1, email1, fname1, lname1, reply, code;
+    EditText user_input, email, fname, lname;
+    String user, email1, fname1, lname1, reply, code;
 
     public ProfileFragment() {
     }
@@ -59,19 +59,19 @@ public class ProfileFragment extends Fragment {
         email = view.findViewById(R.id.email1);
         fname = view.findViewById(R.id.fname);
         lname = view.findViewById(R.id.lname);
-        user1 = "";
+        user = "";
         email1 = "";
         fname1 = "";
         lname1 = "";
     }
 
     public void create(View view) {
-        user1 = user.getText().toString();
+        user = user_input.getText().toString();
         email1 = email.getText().toString();
         fname1 = fname.getText().toString();
         lname1 = lname.getText().toString();
 
-        if(user1.isEmpty() || email1.isEmpty() || fname1.isEmpty() || lname1.isEmpty()) {
+        if(user.isEmpty() || email1.isEmpty() || fname1.isEmpty() || lname1.isEmpty()) {
             Toast.makeText(getContext(), "Fields cannot be blank", Toast.LENGTH_SHORT).show();  // Check whether the fields are not blank
         }
         else {
@@ -83,7 +83,7 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void run() {
                     try {
-                        URL url = new URL (Config.api_url2);                                             // new url object is created
+                        URL url = new URL (Config.ADD_URL);                                             // new url object is created
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();              // HTTP connection object is created
                         conn.setRequestMethod("POST");                                                  // POST method
                         conn.setRequestProperty("Content-Type", "application/json; utf-8");             // JSON format is specified
@@ -92,7 +92,7 @@ public class ProfileFragment extends Fragment {
                         conn.setDoInput(true);
                         JSONObject input = new JSONObject();                                           // New JSON object is created
                         // Give data to the json object
-                        input.put("username", user1);
+                        input.put("username", user);
                         input.put("email", email1);
                         input.put("firstName", fname1);
                         input.put("lastName", lname1);
