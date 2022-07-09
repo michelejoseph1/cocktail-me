@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cocktailme.R;
 import com.example.cocktailme.RecipeDetails;
-import com.example.cocktailme.adapters.CocktailAdapter;
+import com.example.cocktailme.adapters.CacheAdapter;
 import com.example.cocktailme.db.DatabaseHelper;
 import com.example.cocktailme.db.RecipeModel;
 import com.example.cocktailme.network.RecipeApiService;
@@ -37,7 +37,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class HomeFragment extends Fragment implements CocktailAdapter.OnRecipeListener {
+public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListener {
     public static final String BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/";
     private static final String TAG = "RecipeListFragment";
 
@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment implements CocktailAdapter.OnRecipeLi
     private TextView iconic;
     private View viewId;
 
-    CocktailAdapter adapter;
+    CacheAdapter adapter;
 
 
 
@@ -153,7 +153,7 @@ public class HomeFragment extends Fragment implements CocktailAdapter.OnRecipeLi
             int id = recipeModelDB.getId();
         }
         verticalRecipeModels = recipeModelDatabase;
-        adapter = new CocktailAdapter(verticalRecipeModels, this);
+        adapter = new CacheAdapter(verticalRecipeModels, this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -173,10 +173,10 @@ public class HomeFragment extends Fragment implements CocktailAdapter.OnRecipeLi
                 RecipeResponse recipeResponse = response.body();
                 verticalRecipeModels = recipeResponse.getRecipeModels();
                 if (verticalRecipeModels != null) {
-                    adapter = new CocktailAdapter(verticalRecipeModels, HomeFragment.this);
+                    adapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
                     recyclerView.setAdapter(adapter);
                 }else {
-                    adapter = new CocktailAdapter(verticalRecipeModels, HomeFragment.this);
+                    adapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
                     recyclerView.setAdapter(adapter);
                     Toast.makeText(getActivity(), "No Result Found", Toast.LENGTH_LONG).show();
                 }
@@ -216,7 +216,7 @@ public class HomeFragment extends Fragment implements CocktailAdapter.OnRecipeLi
                     fetchRandomRecipes(nRandom + 1, randomRecipes1, randomRecipes2);
                 }else {
                     verticalRecipeModels = randomRecipes1;
-                    adapter = new CocktailAdapter(verticalRecipeModels, HomeFragment.this);
+                    adapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
                     recyclerView.setAdapter(adapter);
                     horizontalRecipeModels = randomRecipes2;
                 }

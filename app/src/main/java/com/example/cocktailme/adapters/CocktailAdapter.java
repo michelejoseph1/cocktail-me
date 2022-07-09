@@ -1,6 +1,7 @@
 package com.example.cocktailme.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cocktailme.R;
+import com.example.cocktailme.RecipeDetailsActivity;
 import com.example.cocktailme.db.RecipeModel;
 import com.example.cocktailme.models.Cocktails;
 import com.squareup.picasso.Picasso;
@@ -27,57 +29,64 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     TextView recipeDesc;
     ImageView ivCocktail;
     private List<RecipeModel> recipeModels = new ArrayList<>();
-    private CocktailAdapter.OnRecipeListener mOnRecipeListener;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView textView;
-        public ImageView imageView;
-        public TextView category;
-        CocktailAdapter.OnRecipeListener onRecipeListener;
-        public ViewHolder(View v, CocktailAdapter.OnRecipeListener onRecipeListener) {
-            super(v);
-            textView = (TextView) v.findViewById(R.id.layout_recipe_title);
-            imageView = (ImageView) v.findViewById(R.id.cocktailImage);
-            category = v.findViewById(R.id.category);
-            this.onRecipeListener = onRecipeListener;
-            v.setOnClickListener(this);
-        }
-        @Override
-        public void onClick(View v) {
-            onRecipeListener.onRecipeClick(getAdapterPosition());
-        }
+    public CocktailAdapter(Context context, List<Cocktails> cocktails) {
+        this.context = context;
+        this.cocktails = cocktails;
     }
-    public CocktailAdapter(List<RecipeModel> newRecipeModels, CocktailAdapter.OnRecipeListener onRecipeListener) {
-        recipeModels.clear();
-        if (newRecipeModels != null){
-            recipeModels.addAll(newRecipeModels);
-            this.mOnRecipeListener = onRecipeListener;
-        }
-    }
-
+    //usually involves inflating a layout from XML and returning the holder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("CocktailAdapter", "onCreateViewHolder");
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recipe, parent, false);
-        CocktailAdapter.ViewHolder vh = new CocktailAdapter.ViewHolder(v, mOnRecipeListener);
-        return vh;
+        View cocktailView = LayoutInflater.from(context).inflate(R.layout.item_recipe,parent, false);
+        return new ViewHolder(cocktailView);
     }
     @Override
     public void onBindViewHolder (@NonNull ViewHolder holder,int position){
-        RecipeModel currentRecipeModel = recipeModels.get(position);
-        holder.textView.setText(currentRecipeModel.getRecipeName());
-        Picasso.get().load(currentRecipeModel.getImage()).into(holder.imageView);
-        holder.category.setText(currentRecipeModel.getCategory());
-    }
-
-    @Override
-    public int getItemCount () {
-                return recipeModels.size();
+                 RecipeModel currentRecipeModel = recipeModels.get(position);
+        holder.title.setText(currentRecipeModel.getRecipeName());
+        Picasso.get().load(currentRecipeModel.getImage()).into(holder.ivCocktail);
+        holder.recipeDesc.setText(currentRecipeModel.getCategory());
             }
 
-    public interface OnRecipeListener {
-        void onRecipeClick(int position);
-        void onHorizontalRecipeClick(int position);
+            @Override
+            public int getItemCount () {
+                return cocktails.size();
+            }
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        TextView title;
+        TextView recipeDesc;
+        ImageView ivCocktail;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.title);
+            recipeDesc = itemView.findViewById(R.id.recipeDesc);
+            ivCocktail = itemView.findViewById(R.id.ivCocktail);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            // gets item position
+            int position = getAdapterPosition();
+            // make sure the position is valid, i.e. actually exists in the view
+            if (position != RecyclerView.NO_POSITION) {
+                // get the movie at the position, this won't work if the class is static
+                Cocktails ingredient = cocktails.get(position);
+                // create intent for the new activity
+                Intent intent = new Intent(context, RecipeDetailsActivity.class);
+                // serialize the movie using parceler, use its short name as a key
+               // intent.putExtra(Cocktails.class.getSimpleName(), Parcels.wrap(ingredient));
+                // show the activity
+                context.startActivity(intent);
+            }
+        }
     }
-}
+    }
+    //test
+
+
+
