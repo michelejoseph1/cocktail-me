@@ -28,7 +28,6 @@ import com.example.cocktailme.db.RecipeModel;
 import com.example.cocktailme.network.RecipeApiService;
 import com.example.cocktailme.network.RecipeResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -51,7 +50,7 @@ public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListe
     private EditText editQuery;
     private TextView tabTitle;
     private Retrofit retrofit = null;
-    private List<RecipeModel> verticalRecipeModels;
+    private List<RecipeModel> listRecipeModels;
     private List<RecipeModel> horizontalRecipeModels;
     private LinearLayoutManager horizontalLayout;
     private TextView iconic;
@@ -100,25 +99,6 @@ return view;
 
 
     }
-
-    private void initMyRecipe(View view) {
-        tabTitle.setText(R.string.tab3Title);
-        editQuery.setVisibility(View.GONE);
-        iconic.setVisibility(View.GONE);
-        refreshDatabase();
-    }
-
-    public void refreshDatabase() {
-        List<RecipeModel> recipeModelDatabase = new ArrayList<>();
-        recipeModelDatabase.addAll(db.getAllRecipes());
-        for (RecipeModel recipeModelDB : recipeModelDatabase) {
-            int id = recipeModelDB.getId();
-        }
-        verticalRecipeModels = recipeModelDatabase;
-        cacheAdapter = new CacheAdapter(verticalRecipeModels, this);
-        recyclerView.setAdapter(cacheAdapter);
-    }
-
     private void fetchRecipes(String query) {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
@@ -126,36 +106,31 @@ return view;
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
-
         RecipeApiService recipeApiService = retrofit.create(RecipeApiService.class);
         Call<RecipeResponse> call = recipeApiService.getRecipes(query);
         call.enqueue(new Callback<RecipeResponse>() {
             @Override
             public void onResponse(Call<RecipeResponse> call, Response<RecipeResponse> response) {
                 RecipeResponse recipeResponse = response.body();
-                verticalRecipeModels = recipeResponse.getRecipeModels();
-                if (verticalRecipeModels != null) {
-                    cacheAdapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
+                listRecipeModels = recipeResponse.getRecipeModels();
+                if (listRecipeModels != null) {
+                    cacheAdapter = new CacheAdapter(listRecipeModels, HomeFragment.this);
                     recyclerView.setAdapter(cacheAdapter);
                 }else {
-                    cacheAdapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
+                    cacheAdapter = new CacheAdapter(listRecipeModels, HomeFragment.this);
                     recyclerView.setAdapter(cacheAdapter);
-                    Toast.makeText(getActivity(), "No Result Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Unfortunately, we did not find any recipes containing those ingredients.", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<RecipeResponse> call, Throwable t) {
-                Log.i("failed:", "11111111111111");
+                Log.i(TAG, "response failed");
             }
         });
     }
-
-
     private void fetchRandomRecipes(int nRandom, List<RecipeModel> randomRecipes1, List<RecipeModel> randomRecipes2) {
-        Log.i("random fetched:", "111111111");
         if (retrofit == null) {
-            Log.i("fetched:", "retrofit = null");
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -177,10 +152,9 @@ return view;
                 if (nRandom < 20) {
                     fetchRandomRecipes(nRandom + 1, randomRecipes1, randomRecipes2);
                 }else {
-                    verticalRecipeModels = randomRecipes1;
-                    cacheAdapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
+                    listRecipeModels = randomRecipes1;
+                    cacheAdapter = new CacheAdapter(listRecipeModels, HomeFragment.this);
                     recyclerView.setAdapter(cacheAdapter);
-                    horizontalRecipeModels = randomRecipes2;
                 }
             }
 
@@ -201,8 +175,8 @@ return view;
     @Override
     public void onRecipeClick(int position) {
         Log.d(TAG, "onRecipeClick: " + position);
-        Log.d(TAG, "onRecipeClick: " + verticalRecipeModels.get(position).getInstructions());
-        RecipeModel currentRecipeModel = verticalRecipeModels.get(position);
+        Log.d(TAG, "onRecipeClick: " + listRecipeModels.get(position).getInstructions());
+        RecipeModel currentRecipeModel = listRecipeModels.get(position);
         Intent intent = new Intent(getActivity(), RecipeDetails.class);
         intent.putExtra("currRecipe", currentRecipeModel);
         startActivity(intent);
