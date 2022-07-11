@@ -5,7 +5,12 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeModel implements Parcelable {
 
@@ -46,7 +51,6 @@ public class RecipeModel implements Parcelable {
     public static final String MEASUREMENT13 = "measurement13";
     public static final String MEASUREMENT14 = "measurement14";
     public static final String MEASUREMENT15 = "measurement15";
-
 
 
     @SerializedName("idDrink")
@@ -164,12 +168,11 @@ public class RecipeModel implements Parcelable {
                     + MEASUREMENT15 + " TEXT)";
 
 
-
-
     public static final String DELETE_TABLE =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-    public RecipeModel() {}
+    public RecipeModel() {
+    }
 
     public RecipeModel(Parcel in) {
         this.id = in.readInt();
@@ -212,7 +215,7 @@ public class RecipeModel implements Parcelable {
 
     }
 
-    public ArrayList<String> getAllIngredients(){
+    public ArrayList<String> getAllIngredients() {
         ArrayList<String> allIngredients = new ArrayList<>();
         if (ingredient1 != null) {
             allIngredients.add(ingredient1);
@@ -436,7 +439,6 @@ public class RecipeModel implements Parcelable {
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
-
 
 
     public String getIngredient1() {
@@ -680,4 +682,20 @@ public class RecipeModel implements Parcelable {
         this.measurement15 = measurement15;
     }
 
+
+    public static List<RecipeModel> fromJsonArray(JSONArray cocktailJsonArray) throws JSONException {
+        List<RecipeModel> cocktailList= new ArrayList<>();
+        for (int cocktail = 0; cocktail < cocktailJsonArray.length(); cocktail++) {
+            cocktailList.add(new RecipeModel(cocktailJsonArray.getJSONObject(cocktail)));
+        }
+        return cocktailList;
+    }
+    public RecipeModel(JSONObject jsonObject) throws JSONException {
+//        title = jsonObject.getString("strDrink");
+//        cocktailPath = jsonObject.getString("strDrinkThumb");
+//        cocktailID = jsonObject.getInt("idDrink");
+        setRecipeName(jsonObject.getString("strDrink"));
+        setImage(jsonObject.getString("strDrinkThumb"));
+        setId(jsonObject.getInt("idDrink"));
+    }
 }

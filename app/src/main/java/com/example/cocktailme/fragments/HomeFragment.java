@@ -3,7 +3,6 @@ package com.example.cocktailme.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +18,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cocktailme.CocktailNamesActivity;
 import com.example.cocktailme.R;
 import com.example.cocktailme.RecipeDetails;
 import com.example.cocktailme.adapters.CacheAdapter;
+import com.example.cocktailme.adapters.CocktailAdapter;
 import com.example.cocktailme.db.DatabaseHelper;
 import com.example.cocktailme.db.RecipeModel;
 import com.example.cocktailme.network.RecipeApiService;
@@ -55,14 +56,11 @@ public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListe
     private LinearLayoutManager horizontalLayout;
     private TextView iconic;
     private View viewId;
+    CocktailAdapter cocktailAdapter;
+    List<RecipeModel> cocktailList;
 
-    CacheAdapter adapter;
+    CacheAdapter cacheAdapter;
 
-
-
-    /**
-     * Create a new instance of the fragment
-     */
     public static HomeFragment newInstance(int index) {
         HomeFragment fragment = new HomeFragment();
         Bundle b = new Bundle();
@@ -77,65 +75,32 @@ public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListe
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         db = new DatabaseHelper(getActivity());
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         fragmentContainer = view.findViewById(R.id.fragment_container);
         recyclerView = view.findViewById(R.id.fragment_recycler_view);
         cardView = view.findViewById(R.id.card_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        horizontalLayout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        horizontalScrollView.setLayoutManager(horizontalLayout);
         iconic = view.findViewById(R.id.iconic);
         viewId = view.findViewById(R.id.view);
 
         tabTitle = view.findViewById(R.id.tabTitle);
-
         editQuery = (EditText) view.findViewById(R.id.edit_query);
+        CocktailNamesActivity tempActivity = (CocktailNamesActivity) getActivity();
+        cocktailList = tempActivity.cocktails;
+        cocktailAdapter = tempActivity.cocktailAdapter;
+        recyclerView.setAdapter(cocktailAdapter);
 
-        int tabIndex = getArguments().getInt("index", -1);
-        switch (tabIndex) {
-            case 0:
-                initPopular(view);
-                break;
-            case 1:
-                initSearch(view);
-                break;
-            case 2:
-                initMyRecipe(view);
-                break;
-        }
-        return view;
+
     }
 
-    private void initPopular(View view) {
-        editQuery.setVisibility(View.GONE);
-        tabTitle.setText(R.string.tab1Title);
-        List<RecipeModel> randomRecipes1 = new ArrayList<>();
-        List<RecipeModel> randomRecipes2 = new ArrayList<>();
-        fetchRandomRecipes(0, randomRecipes1, randomRecipes2);
-        iconic.setText("Iconic Cocktails");
-    }
-
-    private void initSearch(View view) {
-        editQuery.setVisibility(View.VISIBLE);
-        iconic.setVisibility(View.GONE);
-        viewId.setVisibility(View.GONE);
-        editQuery.setImeActionLabel("SEARCH", KeyEvent.KEYCODE_ENTER);
-        editQuery.setOnKeyListener((v, keyCode, event) -> {
-            if ((event.getAction() == KeyEvent.ACTION_DOWN)
-                    && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                String query = editQuery.getText().toString();
-                fetchRecipes(query);
-                return true;
-            }
-            return false;
-        });
-        tabTitle.setText(R.string.tab2Title);
-    }
-
-    /**
-     * Init the fragment
-     */
     private void initMyRecipe(View view) {
         tabTitle.setText(R.string.tab3Title);
         editQuery.setVisibility(View.GONE);
@@ -143,9 +108,6 @@ public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListe
         refreshDatabase();
     }
 
-    /**
-     * Display updated recipes from db
-     */
     public void refreshDatabase() {
         List<RecipeModel> recipeModelDatabase = new ArrayList<>();
         recipeModelDatabase.addAll(db.getAllRecipes());
@@ -153,8 +115,8 @@ public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListe
             int id = recipeModelDB.getId();
         }
         verticalRecipeModels = recipeModelDatabase;
-        adapter = new CacheAdapter(verticalRecipeModels, this);
-        recyclerView.setAdapter(adapter);
+        cacheAdapter = new CacheAdapter(verticalRecipeModels, this);
+        recyclerView.setAdapter(cacheAdapter);
     }
 
     private void fetchRecipes(String query) {
@@ -173,11 +135,11 @@ public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListe
                 RecipeResponse recipeResponse = response.body();
                 verticalRecipeModels = recipeResponse.getRecipeModels();
                 if (verticalRecipeModels != null) {
-                    adapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
-                    recyclerView.setAdapter(adapter);
+                    cacheAdapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
+                    recyclerView.setAdapter(cacheAdapter);
                 }else {
-                    adapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
-                    recyclerView.setAdapter(adapter);
+                    cacheAdapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
+                    recyclerView.setAdapter(cacheAdapter);
                     Toast.makeText(getActivity(), "No Result Found", Toast.LENGTH_LONG).show();
                 }
             }
@@ -216,8 +178,8 @@ public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListe
                     fetchRandomRecipes(nRandom + 1, randomRecipes1, randomRecipes2);
                 }else {
                     verticalRecipeModels = randomRecipes1;
-                    adapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
-                    recyclerView.setAdapter(adapter);
+                    cacheAdapter = new CacheAdapter(verticalRecipeModels, HomeFragment.this);
+                    recyclerView.setAdapter(cacheAdapter);
                     horizontalRecipeModels = randomRecipes2;
                 }
             }
@@ -229,9 +191,6 @@ public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListe
         });
     }
 
-    /**
-     * Refresh
-     */
     public void refresh() {
         if (getArguments().getInt("index", 0) > -1 && recyclerView != null) {
             recyclerView.smoothScrollToPosition(0);
@@ -245,7 +204,7 @@ public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListe
         Log.d(TAG, "onRecipeClick: " + verticalRecipeModels.get(position).getInstructions());
         RecipeModel currentRecipeModel = verticalRecipeModels.get(position);
         Intent intent = new Intent(getActivity(), RecipeDetails.class);
-        intent.putExtra("MyRecipe", currentRecipeModel);
+        intent.putExtra("currRecipe", currentRecipeModel);
         startActivity(intent);
     }
 
@@ -254,7 +213,7 @@ public class HomeFragment extends Fragment implements CacheAdapter.OnRecipeListe
         Log.d(TAG, "onHorizontalRecipeClick: ");
         RecipeModel currentRecipeModel = horizontalRecipeModels.get(position);
         Intent intent = new Intent(getActivity(), RecipeDetails.class);
-        intent.putExtra("MyRecipe", currentRecipeModel);
+        intent.putExtra("currRecipe", currentRecipeModel);
         startActivity(intent);
     }
 

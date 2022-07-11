@@ -30,9 +30,9 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     ImageView ivCocktail;
     private List<RecipeModel> recipeModels = new ArrayList<>();
 
-    public CocktailAdapter(Context context, List<Cocktails> cocktails) {
+    public CocktailAdapter(Context context, List<RecipeModel> cocktails) {
         this.context = context;
-        this.cocktails = cocktails;
+        this.recipeModels = cocktails;
     }
     //usually involves inflating a layout from XML and returning the holder
     @NonNull
@@ -44,7 +44,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     }
     @Override
     public void onBindViewHolder (@NonNull ViewHolder holder,int position){
-                 RecipeModel currentRecipeModel = recipeModels.get(position);
+        RecipeModel currentRecipeModel = recipeModels.get(position);
         holder.title.setText(currentRecipeModel.getRecipeName());
         Picasso.get().load(currentRecipeModel.getImage()).into(holder.ivCocktail);
         holder.recipeDesc.setText(currentRecipeModel.getCategory());
@@ -52,7 +52,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
 
             @Override
             public int getItemCount () {
-                return cocktails.size();
+                return recipeModels.size();
             }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -75,11 +75,11 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
             // make sure the position is valid, i.e. actually exists in the view
             if (position != RecyclerView.NO_POSITION) {
                 // get the movie at the position, this won't work if the class is static
-                Cocktails ingredient = cocktails.get(position);
+                RecipeModel ingredient = recipeModels.get(position);
                 // create intent for the new activity
                 Intent intent = new Intent(context, RecipeDetailsActivity.class);
                 // serialize the movie using parceler, use its short name as a key
-               // intent.putExtra(Cocktails.class.getSimpleName(), Parcels.wrap(ingredient));
+                intent.putExtra(RecipeModel.class.getName(), ingredient);
                 // show the activity
                 context.startActivity(intent);
             }
