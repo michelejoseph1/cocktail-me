@@ -173,7 +173,7 @@ public class RecipeModel implements Parcelable {
 
     public RecipeModel() {
     }
-
+//we are counting to 15 because there is a maximum of 15 possible ingredients/measurements for each recipe
     public RecipeModel(Parcel in) {
         this.id = in.readInt();
         this.recipeName = in.readString();
@@ -691,9 +691,6 @@ public class RecipeModel implements Parcelable {
         return cocktailList;
     }
     public RecipeModel(JSONObject jsonObject) throws JSONException {
-//        title = jsonObject.getString("strDrink");
-//        cocktailPath = jsonObject.getString("strDrinkThumb");
-//        cocktailID = jsonObject.getInt("idDrink");
         setRecipeName(jsonObject.getString("strDrink"));
         setImage(jsonObject.getString("strDrinkThumb"));
         setId(jsonObject.getInt("idDrink"));

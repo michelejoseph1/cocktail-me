@@ -48,7 +48,7 @@ public class CocktailNamesActivity extends AppCompatActivity {
     private ArrayList<String> measurements = new ArrayList<>();
     private RecipeModel recipeModel;
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/filter.php";
-public List<RecipeModel> cocktails;
+    public List<RecipeModel> cocktails;
     public CocktailAdapter cocktailAdapter;
 
 
@@ -95,12 +95,10 @@ public List<RecipeModel> cocktails;
         bottomNavigationView.setSelectedItemId(R.id.action_home);
 
 
-
-
         getRecipesMethod(insertedIngredients);
 
     }
-//doesn't work with commas
+
     public void getRecipesMethod(String insertedIngredients) {
         RequestHeaders headers = new RequestHeaders();
         RequestParams params = new RequestParams();
@@ -126,44 +124,11 @@ public List<RecipeModel> cocktails;
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 Log.d(TAG, "onFailure" + statusCode + response);
             }
         });
     }
-
-
-        //goRecipeDetailsFromCache();
-
-//    private void goRecipeDetailsFromCache() {
-//        Intent ingredientsToRecipes = getIntent();
-//        recipeModel = ingredientsToRecipes.getParcelableExtra("currRecipe");
-//
-//        DatabaseHelper databaseHelper = new DatabaseHelper(this);
-//        TextView layoutTitle = findViewById(R.id.detailRecipeTitle);
-//        TextView instructions = findViewById(R.id.detailRecipeInstruction);
-//        ImageView detailImage = findViewById(R.id.detailsImage);
-//        ListView ingredientsListView = findViewById(R.id.ingredientsListView);
-//        Button deleteButton = findViewById(R.id.delete_button);
-//        if (!databaseHelper.checkExist(recipeModel.getId())) {
-//            deleteButton.setVisibility(View.GONE);
-//        }
-//        ingredients = recipeModel.getAllIngredients();
-//        measurements = recipeModel.getAllMeasurements();
-//        image = recipeModel.getImage();
-//        instruction = recipeModel.getInstructions();
-//        name = recipeModel.getRecipeName();
-//
-//        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ingredientsListView.getLayoutParams();
-//        params.height = 200 * ingredients.size();
-//        ingredientsListView.setLayoutParams(params);
-//        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(ingredients, measurements);
-//        ingredientsListView.setAdapter(ingredientsAdapter);
-//        Log.d(TAG, "onCreate: " + instruction);
-//        Log.d(TAG, "onCreate: " + ingredients);
-//        Picasso.get().load(image).into(detailImage);
-//        instructions.setText(instruction);
-//        layoutTitle.setText(name);
-//    }
 }

@@ -113,26 +113,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(RecipeModel.COLUMN_IMAGE, recipeImage);
         values.put(RecipeModel.COLUMN_INSTRUCTIONS, instructions);
         values.put(RecipeModel.COLUMN_CATEGORY, category);
-        values.put(RecipeModel.INGREDIENT1, ingredient1);
+
+        if(RecipeModel.INGREDIENT1 != null){
+    values.put(RecipeModel.INGREDIENT1, ingredient1);
+}
+if(RecipeModel.INGREDIENT2 != null){
         values.put(RecipeModel.INGREDIENT2, ingredient2);
         values.put(RecipeModel.INGREDIENT3, ingredient3);
         values.put(RecipeModel.INGREDIENT4, ingredient4);
-        values.put(RecipeModel.INGREDIENT5, ingredient5);
-        values.put(RecipeModel.INGREDIENT6, ingredient6);
-        values.put(RecipeModel.INGREDIENT7, ingredient7);
-        values.put(RecipeModel.INGREDIENT8, ingredient8);
-        values.put(RecipeModel.INGREDIENT9, ingredient9);
-        values.put(RecipeModel.INGREDIENT10, ingredient10);
-        values.put(RecipeModel.INGREDIENT11, ingredient11);
-        values.put(RecipeModel.INGREDIENT12, ingredient12);
-        values.put(RecipeModel.INGREDIENT13, ingredient13);
-        values.put(RecipeModel.INGREDIENT14, ingredient14);
-        values.put(RecipeModel.INGREDIENT15, ingredient15);
-        values.put(RecipeModel.MEASUREMENT1, measurement1);
-        values.put(RecipeModel.MEASUREMENT2, measurement2);
-        values.put(RecipeModel.MEASUREMENT3, measurement3);
-        values.put(RecipeModel.MEASUREMENT4, measurement4);
-        values.put(RecipeModel.MEASUREMENT5, measurement5);
+
+            values.put(RecipeModel.INGREDIENT5, ingredient5);
+            values.put(RecipeModel.INGREDIENT6, ingredient6);}
+
+            values.put(RecipeModel.INGREDIENT7, ingredient7);
+            values.put(RecipeModel.INGREDIENT8, ingredient8);
+            values.put(RecipeModel.INGREDIENT9, ingredient9);
+            values.put(RecipeModel.INGREDIENT10, ingredient10);
+
+            values.put(RecipeModel.INGREDIENT11, ingredient11);
+
+            values.put(RecipeModel.INGREDIENT12, ingredient12);
+
+            values.put(RecipeModel.INGREDIENT13, ingredient13);
+
+            values.put(RecipeModel.INGREDIENT14, ingredient14);
+
+            values.put(RecipeModel.INGREDIENT15, ingredient15);
+            values.put(RecipeModel.MEASUREMENT1, measurement1);
+
+            values.put(RecipeModel.MEASUREMENT2, measurement2);
+
+            values.put(RecipeModel.MEASUREMENT3, measurement3);
+
+            values.put(RecipeModel.MEASUREMENT4, measurement4);
+
+            values.put(RecipeModel.MEASUREMENT5, measurement5);
+
         values.put(RecipeModel.MEASUREMENT6, measurement6);
         values.put(RecipeModel.MEASUREMENT7, measurement7);
         values.put(RecipeModel.MEASUREMENT8, measurement8);

@@ -151,7 +151,7 @@ return view;
                 }
                 if (nRandom < 20) {
                     fetchRandomRecipes(nRandom + 1, randomRecipes1, randomRecipes2);
-                }else {
+                } else {
                     listRecipeModels = randomRecipes1;
                     cacheAdapter = new CacheAdapter(listRecipeModels, HomeFragment.this);
                     recyclerView.setAdapter(cacheAdapter);
