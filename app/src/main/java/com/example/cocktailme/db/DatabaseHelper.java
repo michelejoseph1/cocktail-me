@@ -64,7 +64,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void insertRecipe(RecipeModel recipeModel) {
 
-        // get writable database as we want to write data
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -106,7 +105,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String measurement14 = recipeModel.getMeasurement14();
         String measurement15 = recipeModel.getMeasurement15();
 
-        // input all values of this piece of data
         values.put(RecipeModel.COLUMN_ID, id);
         values.put(RecipeModel.COLUMN_RECIPE_NAME, recipeName);
         values.put(RecipeModel.COLUMN_GLASS, recipeGlass);
@@ -143,7 +141,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(RecipeModel.MEASUREMENT13, measurement13);
         values.put(RecipeModel.MEASUREMENT14, measurement14);
         values.put(RecipeModel.MEASUREMENT15, measurement15);
-
         db.insert(RecipeModel.TABLE_NAME, null, values);
         db.close();
     }

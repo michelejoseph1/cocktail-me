@@ -12,7 +12,7 @@ import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.example.cocktailme.models.Cocktails;
+import com.example.cocktailme.db.RecipeModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +23,7 @@ import okhttp3.Headers;
 public class RecipeDetailsActivity extends AppCompatActivity {
 
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/lookup.php";
-    Cocktails cocktail;
+    RecipeModel recipeModel;
     TextView recipeTitle, recipeInstructions, measurementsText;
     public AsyncHttpClient client;
     int cocktailID;
@@ -39,14 +39,14 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         recipeTitle = findViewById(R.id.detailRecipeTitle);
         recipeInstructions = findViewById(R.id.instructionTitle);
         measurementsText = findViewById(R.id.detailRecipeInstruction);
-        cocktailImage = findViewById(R.id.cocktailImage);
-       // cocktail = (Cocktails) Parcels.unwrap(getIntent().getParcelableExtra(Cocktails.class.getSimpleName()));
+        cocktailImage = findViewById(R.id.ivCocktail);
+        recipeModel = (RecipeModel) getIntent().getParcelableExtra(RecipeModel.class.getName());
 
-        recipeTitle.setText(cocktail.getRecipeTitle());
+        recipeTitle.setText(recipeModel.getRecipeName());
 
         client = new AsyncHttpClient();
 
-        cocktailID = cocktail.getID();
+        cocktailID = recipeModel.getId();
         getInstructions(cocktailID);
 
     }
@@ -74,7 +74,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                             //Log.d("RecipeDetails", "Results: " + measurements.toString());
                             Log.d("RecipeDetails", "Results: " + instructions.toString());
                             String imageURL;
-                            imageURL = cocktail.getCocktailPath();
+                            imageURL = recipeModel.getImage();
                             Glide.with(RecipeDetailsActivity.this).load(imageURL).override(500, 500)
                                     .fitCenter().into(cocktailImage);
 

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cocktailme.R;
 import com.example.cocktailme.RecipeDetailsActivity;
 import com.example.cocktailme.db.RecipeModel;
-import com.example.cocktailme.models.Cocktails;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,17 +23,12 @@ import java.util.List;
 public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHolder>{
 
     Context context;
-    List<Cocktails> cocktails;
-    TextView title;
-    TextView recipeDesc;
-    ImageView ivCocktail;
     private List<RecipeModel> recipeModels = new ArrayList<>();
 
-    public CocktailAdapter(Context context, List<Cocktails> cocktails) {
+    public CocktailAdapter(Context context, List<RecipeModel> cocktails) {
         this.context = context;
-        this.cocktails = cocktails;
+        this.recipeModels = cocktails;
     }
-    //usually involves inflating a layout from XML and returning the holder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +38,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     }
     @Override
     public void onBindViewHolder (@NonNull ViewHolder holder,int position){
-                 RecipeModel currentRecipeModel = recipeModels.get(position);
+        RecipeModel currentRecipeModel = recipeModels.get(position);
         holder.title.setText(currentRecipeModel.getRecipeName());
         Picasso.get().load(currentRecipeModel.getImage()).into(holder.ivCocktail);
         holder.recipeDesc.setText(currentRecipeModel.getCategory());
@@ -52,7 +46,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
 
             @Override
             public int getItemCount () {
-                return cocktails.size();
+                return recipeModels.size();
             }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -70,23 +64,16 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            // gets item position
             int position = getAdapterPosition();
-            // make sure the position is valid, i.e. actually exists in the view
             if (position != RecyclerView.NO_POSITION) {
-                // get the movie at the position, this won't work if the class is static
-                Cocktails ingredient = cocktails.get(position);
-                // create intent for the new activity
+                RecipeModel ingredient = recipeModels.get(position);
                 Intent intent = new Intent(context, RecipeDetailsActivity.class);
-                // serialize the movie using parceler, use its short name as a key
-               // intent.putExtra(Cocktails.class.getSimpleName(), Parcels.wrap(ingredient));
-                // show the activity
+                intent.putExtra(RecipeModel.class.getName(), ingredient);
                 context.startActivity(intent);
             }
         }
     }
     }
-    //test
 
 
 

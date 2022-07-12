@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton settingsButton;
     Button generateButton;
     String insertedIngredients;
-    private DatabaseHelper db;
+    private DatabaseHelper databaseHelper;
 
 
 
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initDatabase() {
-        db = new DatabaseHelper(this);
-        if (!db.checkForTableExists("recipes")) {
-            db.resetTable();
+        databaseHelper = new DatabaseHelper(this);
+        if (!databaseHelper.checkForTableExists("recipes")) {
+            databaseHelper.resetTable();
         }
 
         generateButton = findViewById(R.id.generateButton);
