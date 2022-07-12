@@ -80,4 +80,6 @@ public class Constants {
             "Watermelon", "Chareau", "Cinnamon Whisky", "Red Bull", "Diet Coke", "Rosemary Syrup", "Figs", "Thyme",
             "Blood Orange", "Amaro Montenegro", "Ruby Port", "Rose"
     };
+    public static final String SEARCH_API_LINK =  "c13dadbdfdmshb5f916990392087p1e49ccjsnae8ca04335f1";
+    public static final String HOME_LINK = "the-cocktail-db.p.rapidapi.com";
 }

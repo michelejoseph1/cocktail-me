@@ -19,6 +19,7 @@ import com.example.cocktailme.fragments.HomeFragment;
 import com.example.cocktailme.fragments.ProfileFragment;
 import com.example.cocktailme.fragments.SettingsFragment;
 import com.example.cocktailme.models.Cocktails;
+import com.example.cocktailme.models.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -104,8 +105,12 @@ public class CocktailNamesActivity extends AppCompatActivity {
         RequestParams params = new RequestParams();
         params.put("i", insertedIngredients);
         Log.d(TAG, "results: " + insertedIngredients);
-        headers.put("X-RapidAPI-Key", "c13dadbdfdmshb5f916990392087p1e49ccjsnae8ca04335f1");
-        headers.put("X-RapidAPI-Host", "the-cocktail-db.p.rapidapi.com");
+        headers.put("X-RapidAPI-Key", Constants.SEARCH_API_LINK);
+        headers.put("X-RapidAPI-Host", Constants.HOME_LINK);
+        Log.d("search link", "Results: " + Constants.SEARCH_API_LINK);
+        Log.d("home link", "Results: " + Constants.HOME_LINK);
+
+
 
 
         client.get(INGREDIENT_LIST_URL, headers, params, new JsonHttpResponseHandler() {
