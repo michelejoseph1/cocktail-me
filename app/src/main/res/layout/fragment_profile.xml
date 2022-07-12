@@ -8,12 +8,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create User"
-        android:textSize="100px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="450px"
+        android:text="Welcome to CocktailMe!"
         android:textColor="#d3d8e3"
-        android:layout_alignParentTop = "true"
-        android:layout_centerHorizontal = "true"
-        android:layout_marginTop="450px" />
+        android:textSize="75px" />
 
     <EditText
         android:id="@+id/user1"

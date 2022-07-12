@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "816113128476",
+    "project_id": "cocktailme-556e6",
+    "storage_bucket": "cocktailme-556e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816113128476:android:f55275812a1bb7f169bbd9",
+        "android_client_info": {
+          "package_name": "com.example.cocktailme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816113128476-389q0c4curskvqittd35b25j06ct90ha.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIqSTg0ZxyiBJD5RRqAmR_GzOd8axS_xo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816113128476-389q0c4curskvqittd35b25j06ct90ha.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
