@@ -64,7 +64,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void insertRecipe(RecipeModel recipeModel) {
 
-        // get writable database as we want to write data
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -106,49 +105,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String measurement14 = recipeModel.getMeasurement14();
         String measurement15 = recipeModel.getMeasurement15();
 
-        // input all values of this piece of data
         values.put(RecipeModel.COLUMN_ID, id);
         values.put(RecipeModel.COLUMN_RECIPE_NAME, recipeName);
         values.put(RecipeModel.COLUMN_GLASS, recipeGlass);
         values.put(RecipeModel.COLUMN_IMAGE, recipeImage);
         values.put(RecipeModel.COLUMN_INSTRUCTIONS, instructions);
         values.put(RecipeModel.COLUMN_CATEGORY, category);
-
-        if(RecipeModel.INGREDIENT1 != null){
-    values.put(RecipeModel.INGREDIENT1, ingredient1);
-}
-if(RecipeModel.INGREDIENT2 != null){
+        values.put(RecipeModel.INGREDIENT1, ingredient1);
         values.put(RecipeModel.INGREDIENT2, ingredient2);
         values.put(RecipeModel.INGREDIENT3, ingredient3);
         values.put(RecipeModel.INGREDIENT4, ingredient4);
-
-            values.put(RecipeModel.INGREDIENT5, ingredient5);
-            values.put(RecipeModel.INGREDIENT6, ingredient6);}
-
-            values.put(RecipeModel.INGREDIENT7, ingredient7);
-            values.put(RecipeModel.INGREDIENT8, ingredient8);
-            values.put(RecipeModel.INGREDIENT9, ingredient9);
-            values.put(RecipeModel.INGREDIENT10, ingredient10);
-
-            values.put(RecipeModel.INGREDIENT11, ingredient11);
-
-            values.put(RecipeModel.INGREDIENT12, ingredient12);
-
-            values.put(RecipeModel.INGREDIENT13, ingredient13);
-
-            values.put(RecipeModel.INGREDIENT14, ingredient14);
-
-            values.put(RecipeModel.INGREDIENT15, ingredient15);
-            values.put(RecipeModel.MEASUREMENT1, measurement1);
-
-            values.put(RecipeModel.MEASUREMENT2, measurement2);
-
-            values.put(RecipeModel.MEASUREMENT3, measurement3);
-
-            values.put(RecipeModel.MEASUREMENT4, measurement4);
-
-            values.put(RecipeModel.MEASUREMENT5, measurement5);
-
+        values.put(RecipeModel.INGREDIENT5, ingredient5);
+        values.put(RecipeModel.INGREDIENT6, ingredient6);
+        values.put(RecipeModel.INGREDIENT7, ingredient7);
+        values.put(RecipeModel.INGREDIENT8, ingredient8);
+        values.put(RecipeModel.INGREDIENT9, ingredient9);
+        values.put(RecipeModel.INGREDIENT10, ingredient10);
+        values.put(RecipeModel.INGREDIENT11, ingredient11);
+        values.put(RecipeModel.INGREDIENT12, ingredient12);
+        values.put(RecipeModel.INGREDIENT13, ingredient13);
+        values.put(RecipeModel.INGREDIENT14, ingredient14);
+        values.put(RecipeModel.INGREDIENT15, ingredient15);
+        values.put(RecipeModel.MEASUREMENT1, measurement1);
+        values.put(RecipeModel.MEASUREMENT2, measurement2);
+        values.put(RecipeModel.MEASUREMENT3, measurement3);
+        values.put(RecipeModel.MEASUREMENT4, measurement4);
+        values.put(RecipeModel.MEASUREMENT5, measurement5);
         values.put(RecipeModel.MEASUREMENT6, measurement6);
         values.put(RecipeModel.MEASUREMENT7, measurement7);
         values.put(RecipeModel.MEASUREMENT8, measurement8);
@@ -159,7 +141,6 @@ if(RecipeModel.INGREDIENT2 != null){
         values.put(RecipeModel.MEASUREMENT13, measurement13);
         values.put(RecipeModel.MEASUREMENT14, measurement14);
         values.put(RecipeModel.MEASUREMENT15, measurement15);
-
         db.insert(RecipeModel.TABLE_NAME, null, values);
         db.close();
     }

@@ -1,5 +1,8 @@
 package com.example.cocktailme;
 
+import static com.example.cocktailme.models.Constants.HOME_LINK;
+import static com.example.cocktailme.models.Constants.SEARCH_API_LINK;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,7 +22,6 @@ import com.example.cocktailme.fragments.HomeFragment;
 import com.example.cocktailme.fragments.ProfileFragment;
 import com.example.cocktailme.fragments.SettingsFragment;
 import com.example.cocktailme.models.Cocktails;
-import com.example.cocktailme.models.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -105,10 +107,10 @@ public class CocktailNamesActivity extends AppCompatActivity {
         RequestParams params = new RequestParams();
         params.put("i", insertedIngredients);
         Log.d(TAG, "results: " + insertedIngredients);
-        headers.put("X-RapidAPI-Key", Constants.SEARCH_API_LINK);
-        headers.put("X-RapidAPI-Host", Constants.HOME_LINK);
-        Log.d("search link", "Results: " + Constants.SEARCH_API_LINK);
-        Log.d("home link", "Results: " + Constants.HOME_LINK);
+        headers.put("X-RapidAPI-Key", SEARCH_API_LINK);
+        headers.put("X-RapidAPI-Host", HOME_LINK);
+        Log.d("search link", "Results: " + SEARCH_API_LINK);
+        Log.d("home link", "Results: " + HOME_LINK);
 
 
 

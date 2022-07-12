@@ -173,7 +173,7 @@ public class RecipeModel implements Parcelable {
 
     public RecipeModel() {
     }
-//we are counting to 15 because there is a maximum of 15 possible ingredients/measurements for each recipe
+// We are counting to 15 because there is a maximum of 15 possible ingredients/measurements for each recipe
     public RecipeModel(Parcel in) {
         this.id = in.readInt();
         this.recipeName = in.readString();
