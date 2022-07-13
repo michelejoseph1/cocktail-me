@@ -40,16 +40,6 @@ import java.util.Map;
 
 import okhttp3.Headers;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import okhttp3.Headers;
-
 public class CocktailNamesActivity extends AppCompatActivity {
     private final String TAG = "CocktailNamesActivity";
     public AsyncHttpClient client;
@@ -58,25 +48,10 @@ public class CocktailNamesActivity extends AppCompatActivity {
     int cocktailID;
     final FragmentManager fragmentManager = getSupportFragmentManager();
     private BottomNavigationView bottomNavigationView;
-<<<<<<< HEAD
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/filter.php";
     public List<RecipeModel> cocktails;
     public CocktailAdapter cocktailAdapter;
     FirebaseFirestore firestoreHolder;
-=======
-
-    private HashMap<String, String> ingredientMesurementMap = new HashMap<>();
-    private String name;
-    private String instruction;
-    private String image;
-    private ArrayList<String> ingredients = new ArrayList<>();
-    private ArrayList<String> measurements = new ArrayList<>();
-    private RecipeModel recipeModel;
-    public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/filter.php";
-    public List<RecipeModel> cocktails;
-    public CocktailAdapter cocktailAdapter;
-
->>>>>>> 54461d1dbf2959c1adf09facf185f5836d8089cb
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +65,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
         insertedIngredients = getIntent().getStringExtra("search");
         cocktails = new ArrayList<>();
         cocktailAdapter = new CocktailAdapter(this, cocktails);
-<<<<<<< HEAD
-=======
-
->>>>>>> 54461d1dbf2959c1adf09facf185f5836d8089cb
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -122,7 +93,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
 
-<<<<<<< HEAD
         firestoreHolder = FirebaseFirestore.getInstance();
         Map<String, Object> drinks = new HashMap<>();
         drinks.put("gin", cocktail.getRecipeTitle());
@@ -137,8 +107,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
             }
         });
-=======
->>>>>>> 54461d1dbf2959c1adf09facf185f5836d8089cb
 
         getRecipesMethod(insertedIngredients);
 
@@ -155,11 +123,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
         Log.d("home link", "Results: " + HOME_LINK);
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 54461d1dbf2959c1adf09facf185f5836d8089cb
         client.get(INGREDIENT_LIST_URL, headers, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
