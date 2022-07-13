@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cocktailme.db.DatabaseHelper;
 import com.example.cocktailme.db.RecipeModel;
-import com.example.cocktailme.fragments.IngredientsAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -47,7 +44,6 @@ public class RecipeDetails extends AppCompatActivity {
         TextView layoutTitle = findViewById(R.id.detailRecipeTitle);
         TextView instructions = findViewById(R.id.detailRecipeInstruction);
         ImageView detailImage = findViewById(R.id.detailsImage);
-        ListView ingredientsListView = findViewById(R.id.ingredientsListView);
         Button deleteButton = findViewById(R.id.delete_button);
         if (!db.checkExist(recipeModel.getId())) {
             deleteButton.setVisibility(View.GONE);
@@ -59,11 +55,7 @@ public class RecipeDetails extends AppCompatActivity {
         instruction = recipeModel.getInstructions();
         name = recipeModel.getRecipeName();
 
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ingredientsListView.getLayoutParams();
-        params.height = 200 * ingredients.size();
-        ingredientsListView.setLayoutParams(params);
-        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(ingredients, measurements);
-        ingredientsListView.setAdapter(ingredientsAdapter);
+
         Log.d(TAG, "onCreate: " + instruction);
         Log.d(TAG, "onCreate: " + ingredients);
         Picasso.get().load(image).into(detailImage);
