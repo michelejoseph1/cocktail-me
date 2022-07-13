@@ -1,6 +1,9 @@
 plugins {
    id 'com.android.application'
+<<<<<<< HEAD
     id 'com.google.gms.google-services'
+=======
+>>>>>>> 54461d1dbf2959c1adf09facf185f5836d8089cb
 }
 
 android {
