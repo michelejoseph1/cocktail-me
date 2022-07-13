@@ -58,22 +58,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
         Cocktails cocktail = new Cocktails();
-
-        firestoreHolder = FirebaseFirestore.getInstance();
-        Map<String, Object> drinks = new HashMap<>();
-        drinks.put("gin", cocktail.getRecipeTitle());
-        firestoreHolder.collection("drinks").add(drinks).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
-            }
-        });
-
         cocktailTitle = cocktail.getRecipeTitle();
         cocktailID = cocktail.getID();
         Log.d("checking to confirm ID", "Results: " + cocktailID);
@@ -81,9 +65,7 @@ public class CocktailNamesActivity extends AppCompatActivity {
         insertedIngredients = getIntent().getStringExtra("search");
         cocktails = new ArrayList<>();
         cocktailAdapter = new CocktailAdapter(this, cocktails);
-
         bottomNavigationView = findViewById(R.id.bottomNavigation);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -111,6 +93,20 @@ public class CocktailNamesActivity extends AppCompatActivity {
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
 
+        firestoreHolder = FirebaseFirestore.getInstance();
+        Map<String, Object> drinks = new HashMap<>();
+        drinks.put("gin", cocktail.getRecipeTitle());
+        firestoreHolder.collection("drinks").add(drinks).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
+            }
+        });
 
         getRecipesMethod(insertedIngredients);
 
