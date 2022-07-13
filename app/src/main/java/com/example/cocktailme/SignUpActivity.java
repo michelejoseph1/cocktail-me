@@ -42,7 +42,6 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = etPassword.getText().toString();
                 String email = "";
                 signUpUser(username, password);
-                goMainActivity();
             }
         });
     }
