@@ -6,6 +6,7 @@ import static com.example.cocktailme.models.Constants.SEARCH_API_LINK;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,11 @@ import com.example.cocktailme.fragments.HomeFragment;
 import com.example.cocktailme.fragments.ProfileFragment;
 import com.example.cocktailme.fragments.SettingsFragment;
 import com.example.cocktailme.models.Cocktails;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +36,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Headers;
 
@@ -42,18 +48,10 @@ public class CocktailNamesActivity extends AppCompatActivity {
     int cocktailID;
     final FragmentManager fragmentManager = getSupportFragmentManager();
     private BottomNavigationView bottomNavigationView;
-
-    private HashMap<String, String> ingredientMesurementMap = new HashMap<>();
-    private String name;
-    private String instruction;
-    private String image;
-    private ArrayList<String> ingredients = new ArrayList<>();
-    private ArrayList<String> measurements = new ArrayList<>();
-    private RecipeModel recipeModel;
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/filter.php";
     public List<RecipeModel> cocktails;
     public CocktailAdapter cocktailAdapter;
-
+    FirebaseFirestore firestoreHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +66,23 @@ public class CocktailNamesActivity extends AppCompatActivity {
         cocktails = new ArrayList<>();
         cocktailAdapter = new CocktailAdapter(this, cocktails);
 
-        bottomNavigationView = findViewById(R.id.bottomNavigation);
 
+        firestoreHolder = FirebaseFirestore.getInstance();
+        Map<String, Object> drinks = new HashMap<>();
+        drinks.put("gin", cocktail.getRecipeTitle());
+        firestoreHolder.collection("drinks").add(drinks).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -96,8 +109,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
-
-
         getRecipesMethod(insertedIngredients);
 
     }
@@ -111,8 +122,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
         headers.put("X-RapidAPI-Host", HOME_LINK);
         Log.d("search link", "Results: " + SEARCH_API_LINK);
         Log.d("home link", "Results: " + HOME_LINK);
-
-
 
 
         client.get(INGREDIENT_LIST_URL, headers, params, new JsonHttpResponseHandler() {

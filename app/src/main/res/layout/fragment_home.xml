@@ -33,20 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/search_badge"
-                android:layout_margin="8dp">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_query"
-                    android:layout_weight="1"
-                    android:maxLines="1"
-                    android:lines="1"
-                    android:inputType="text|textNoSuggestions"
-                    android:paddingLeft="5dp"
-                    android:hint="search cocktails"/>
-
-            </LinearLayout>
+                android:layout_margin="8dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -73,6 +60,8 @@
                 android:id="@+id/fragment_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+           
 
         </LinearLayout>
     </FrameLayout>

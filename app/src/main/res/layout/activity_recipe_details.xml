@@ -12,32 +12,36 @@
         >
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/ivCocktail"
-            android:scaleType="fitStart"
-            android:adjustViewBounds="true"/>
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart" />
 
         <TextView
+            android:id="@+id/detailRecipeTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivCocktail"
-            android:id="@+id/detailRecipeTitle"
             android:layout_marginTop="15dp"
             android:gravity="center_vertical"
             android:padding="10dp"
-            android:textStyle="bold"
-            android:textSize="30sp"/>
+            android:text="recipe title"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/ingredientsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ingredientsTitle"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
+            android:layout_below="@+id/detailRecipeTitle"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:paddingLeft="5dp"
             android:text="Ingredients"
-            android:layout_below="@+id/detailRecipeTitle"/>
+            android:textSize="20sp" />
 
         <View
             android:layout_width="match_parent"
@@ -47,27 +51,18 @@
             android:layout_below="@id/ingredientsTitle"
             android:background="@color/black"/>
 
-
-        <ListView
-            android:id="@+id/ingredientsListView"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_below="@+id/ingredientsTitle"
-            android:layout_margin="10dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:scrollbars="vertical" />
-
         <TextView
+            android:id="@+id/instructionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/instructionTitle"
-            android:layout_below="@+id/ingredientsListView"
-            android:layout_margin="5dp"
+            android:layout_below="@+id/detailRecipeTitle"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="71dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:paddingLeft="5dp"
             android:text="Instructions"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <View
             android:layout_width="match_parent"
@@ -88,9 +83,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/detailRecipeInstruction"
             android:gravity="center_horizontal"
+            android:orientation="horizontal"
             android:padding="10dp"
-            android:layout_below="@+id/detailRecipeInstruction">
+            android:rotationX="72">
 
             <Button
                 style="@style/Widget.AppCompat.Button"
@@ -102,29 +99,28 @@
                 android:text="save" />
 
             <Button
+                android:id="@+id/delete_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/delete_button"
+                android:layout_marginRight="40dp"
                 android:layout_weight="1"
                 android:onClick="onClickDelete"
-                android:layout_marginRight="40dp"
-                android:text="delete"/>
+                android:text="delete" />
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onClickShare"
-                android:text="share"
-                />
+                android:text="share" />
 
 
             <ImageView
+                android:id="@+id/detailsImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/detailsImage"
-                android:scaleType="fitStart"
-                android:adjustViewBounds="true"/>
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart" />
 
         </LinearLayout>
 
