@@ -65,6 +65,23 @@ public class CocktailNamesActivity extends AppCompatActivity {
         insertedIngredients = getIntent().getStringExtra("search");
         cocktails = new ArrayList<>();
         cocktailAdapter = new CocktailAdapter(this, cocktails);
+
+
+        firestoreHolder = FirebaseFirestore.getInstance();
+        Map<String, Object> drinks = new HashMap<>();
+        drinks.put("gin", cocktail.getRecipeTitle());
+        firestoreHolder.collection("drinks").add(drinks).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
+            }
+        });
+
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -92,22 +109,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
-
-        firestoreHolder = FirebaseFirestore.getInstance();
-        Map<String, Object> drinks = new HashMap<>();
-        drinks.put("gin", cocktail.getRecipeTitle());
-        firestoreHolder.collection("drinks").add(drinks).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
-            }
-        });
-
         getRecipesMethod(insertedIngredients);
 
     }
