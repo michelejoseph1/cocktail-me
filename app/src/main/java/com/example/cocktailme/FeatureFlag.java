@@ -18,7 +18,7 @@ public class FeatureFlag {
         }
     }
 
-     String public void CacheResponse(Cocktails cocktail){
+    public String void CacheResponse(Cocktails cocktail){
         cocktail.getRecipeTitle();
     }
 
