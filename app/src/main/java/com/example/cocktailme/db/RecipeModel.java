@@ -443,7 +443,7 @@ public class RecipeModel implements Parcelable {
     public String getIngredient1() {
         return ingredient1;
     }
-    
+
 
     public void setIngredient1(String ingredient1) {
         this.ingredient1 = ingredient1;
