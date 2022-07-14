@@ -25,5 +25,4 @@ public class FeatureFlag {
     public void apiResponse(RecipeModel recipeModel) {
         recipeModel.getRecipeName();
     }
-
 }
