@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cocktailme.R;
 import com.example.cocktailme.db.RecipeModel;
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.List;
             public ImageView imageView;
             public TextView category;
             OnRecipeListener onRecipeListener;
+
             public ViewHolder(View v, OnRecipeListener onRecipeListener) {
                 super(v);
                 textView = (TextView) v.findViewById(R.id.layout_recipe_title);
@@ -59,10 +62,12 @@ import java.util.List;
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            Trace trace = FirebasePerformance.getInstance().newTrace("TimeToLoadRecipeFromCache");
             RecipeModel currentRecipeModel = recipeModels.get(position);
             holder.textView.setText(currentRecipeModel.getRecipeName());
             Picasso.get().load(currentRecipeModel.getImage()).into(holder.imageView);
             holder.category.setText(currentRecipeModel.getCategory());
+            trace.stop();
         }
 
         @Override

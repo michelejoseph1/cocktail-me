@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cocktailme.R;
 import com.example.cocktailme.RecipeDetailsActivity;
 import com.example.cocktailme.db.RecipeModel;
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHolder>{
+public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHolder> {
 
     Context context;
     private List<RecipeModel> recipeModels = new ArrayList<>();
@@ -29,25 +31,30 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
         this.context = context;
         this.recipeModels = cocktails;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d("CocktailAdapter", "onCreateViewHolder");
-        View cocktailView = LayoutInflater.from(context).inflate(R.layout.item_recipe,parent, false);
+        View cocktailView = LayoutInflater.from(context).inflate(R.layout.item_recipe, parent, false);
         return new ViewHolder(cocktailView);
     }
+
     @Override
-    public void onBindViewHolder (@NonNull ViewHolder holder,int position){
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Trace trace = FirebasePerformance.getInstance().newTrace("TimeToLoadRecipeFromAPI");
         RecipeModel currentRecipeModel = recipeModels.get(position);
         holder.title.setText(currentRecipeModel.getRecipeName());
         Picasso.get().load(currentRecipeModel.getImage()).into(holder.ivCocktail);
         holder.recipeDesc.setText(currentRecipeModel.getCategory());
-            }
+        trace.stop();
+    }
 
-            @Override
-            public int getItemCount () {
-                return recipeModels.size();
-            }
+    @Override
+    public int getItemCount() {
+        return recipeModels.size();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title;
@@ -73,7 +80,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
             }
         }
     }
-    }
+}
 
 
 
