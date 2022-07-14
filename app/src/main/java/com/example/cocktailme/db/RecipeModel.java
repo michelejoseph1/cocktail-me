@@ -440,7 +440,6 @@ public class RecipeModel implements Parcelable {
         this.instructions = instructions;
     }
 
-
     public String getIngredient1() {
         return ingredient1;
     }
