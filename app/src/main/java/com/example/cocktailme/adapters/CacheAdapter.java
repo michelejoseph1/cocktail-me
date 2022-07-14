@@ -62,7 +62,7 @@ import java.util.List;
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Trace trace = FirebasePerformance.getInstance().newTrace("CacheTrace");
+            Trace trace = FirebasePerformance.getInstance().newTrace("TimeToLoadRecipeFromCache");
             RecipeModel currentRecipeModel = recipeModels.get(position);
             holder.textView.setText(currentRecipeModel.getRecipeName());
             Picasso.get().load(currentRecipeModel.getImage()).into(holder.imageView);

@@ -1,8 +1,6 @@
 package com.example.cocktailme.models;
 
 
-import com.google.firebase.perf.metrics.AddTrace;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +38,6 @@ public class Cocktails {
         return String.format(cocktailPath);
 
     }
-    @AddTrace(name = "CacheTrace", enabled = true)
     public String getRecipeTitle() {
         return title;
     }
