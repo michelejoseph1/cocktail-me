@@ -8,21 +8,22 @@ public class FeatureFlag {
     Cocktails cocktail;
     RecipeModel recipeModel;
 
-    public void CacheOrApiCall(){
+    public void cacheOrApiCall() {
 
         useCache = false;
-        if(useCache){
-            CacheResponse(cocktail);
-        }else{
-            ApiResponse(recipeModel);
+        if (useCache) {
+            cacheResponse(cocktail);
+        } else {
+            apiResponse(recipeModel);
         }
     }
 
-    public void CacheResponse(Cocktails cocktail){
+    public void cacheResponse(Cocktails cocktail) {
         cocktail.getRecipeTitle();
     }
 
-    public void ApiResponse(RecipeModel recipeModel){
+    public void apiResponse(RecipeModel recipeModel) {
         recipeModel.getRecipeName();
     }
+
 }
