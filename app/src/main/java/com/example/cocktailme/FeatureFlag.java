@@ -18,11 +18,11 @@ public class FeatureFlag {
         }
     }
 
-    public String void CacheResponse(Cocktails cocktail){
+    public void CacheResponse(Cocktails cocktail){
         cocktail.getRecipeTitle();
     }
 
-    public String void ApiResponse(RecipeModel recipeModel){
+    public void ApiResponse(RecipeModel recipeModel){
         recipeModel.getRecipeName();
     }
 }

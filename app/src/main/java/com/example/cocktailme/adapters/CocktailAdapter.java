@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cocktailme.R;
 import com.example.cocktailme.RecipeDetailsActivity;
 import com.example.cocktailme.db.RecipeModel;
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -38,10 +40,12 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
     }
     @Override
     public void onBindViewHolder (@NonNull ViewHolder holder,int position){
+        Trace trace = FirebasePerformance.getInstance().newTrace("ApiTrace");
         RecipeModel currentRecipeModel = recipeModels.get(position);
         holder.title.setText(currentRecipeModel.getRecipeName());
         Picasso.get().load(currentRecipeModel.getImage()).into(holder.ivCocktail);
         holder.recipeDesc.setText(currentRecipeModel.getCategory());
+        trace.stop();
             }
 
             @Override

@@ -3,6 +3,7 @@ package com.example.cocktailme.db;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.perf.metrics.AddTrace;
 import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONArray;
@@ -400,6 +401,7 @@ public class RecipeModel implements Parcelable {
         this.id = id;
     }
 
+    @AddTrace(name = "ApiTrace", enabled = true)
     public String getRecipeName() {
         return recipeName;
     }
