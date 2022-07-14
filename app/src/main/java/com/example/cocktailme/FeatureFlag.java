@@ -1,23 +1,28 @@
 package com.example.cocktailme;
 
-public class FeatureFlag {
-    public boolean useNewAlgorithm;
-    public void reticulateSplines(){
-        useNewAlgorithm = false;
-        // useNewAlgorithm = true; // UNCOMMENT IF YOU ARE WORKING ON THE NEW SR ALGORITHM
+import com.example.cocktailme.db.RecipeModel;
+import com.example.cocktailme.models.Cocktails;
 
-        if(useNewAlgorithm){
-            return enhancedSplineReticulation();
+public class FeatureFlag {
+    public boolean useCache;
+    Cocktails cocktail;
+    RecipeModel recipeModel;
+
+    public void CacheOrApiCall(){
+
+        useCache = false;
+        if(useCache){
+            CacheResponse(cocktail);
         }else{
-            return oldFashionedSplineReticulation();
+            ApiResponse(recipeModel);
         }
     }
 
-    public void String oldFashionedSplineReticulation(){
-
+    public String void CacheResponse(Cocktails cocktail){
+        cocktail.getRecipeTitle();
     }
 
-    public void String enhancedSplineReticulation(){
-        // TODO: implement better SR algorithm
+    public String void ApiResponse(RecipeModel recipeModel){
+        recipeModel.getRecipeName();
     }
 }

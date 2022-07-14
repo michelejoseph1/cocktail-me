@@ -92,7 +92,6 @@ return view;
 
         tabTitle = view.findViewById(R.id.tabTitle);
 
-        editQuery = (EditText) view.findViewById(R.id.edit_query);
         CocktailNamesActivity tempActivity = (CocktailNamesActivity) getActivity();
         cocktailList = tempActivity.cocktails;
         cocktailAdapter = tempActivity.cocktailAdapter;
