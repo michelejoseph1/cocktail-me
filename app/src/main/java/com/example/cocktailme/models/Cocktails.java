@@ -38,7 +38,6 @@ public class Cocktails {
         return String.format(cocktailPath);
 
     }
-
     public String getRecipeTitle() {
         return title;
     }

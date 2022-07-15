@@ -440,10 +440,10 @@ public class RecipeModel implements Parcelable {
         this.instructions = instructions;
     }
 
-
     public String getIngredient1() {
         return ingredient1;
     }
+
 
     public void setIngredient1(String ingredient1) {
         this.ingredient1 = ingredient1;
