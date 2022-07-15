@@ -17,7 +17,6 @@ public class FeatureFlag {
             apiResponse(recipeModel);
         }
     }
-
     public void cacheResponse(Cocktails cocktail) {
         cocktail.getRecipeTitle();
     }
