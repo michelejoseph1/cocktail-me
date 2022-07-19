@@ -13,9 +13,8 @@ public class Rating extends ParseObject {
     public String getRating() {
         return getString(KEY_NUMRATING);
     }
-
-    public void setDescription(String description) {
-        put(KEY_NUMRATING, description);
+    public void setRating(String numRating) {
+        put(KEY_NUMRATING, numRating);
     }
     public ParseUser getUser(){
         return getParseUser(KEY_USER);
