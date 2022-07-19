@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -73,12 +74,12 @@
             android:background="@color/black"/>
 
         <TextView
+            android:id="@+id/detailRecipeInstruction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/instructionTitle"
             android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:id="@+id/detailRecipeInstruction"/>
+            android:padding="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -130,6 +131,33 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/avgRatingText"
+            android:layout_width="263dp"
+            android:layout_height="36dp"
+            android:layout_below="@+id/ratingBar"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="11dp"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            tools:text="The average rating for this cocktail is 5.0 stars!" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/ratingBar"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="-177dp"
+            android:layout_marginBottom="50dp"
+            android:layout_toStartOf="@+id/avgRatingText"
+            android:background="@android:color/holo_red_dark"
+            android:onClick="setRatingText"
+            android:text="Submit"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold|italic" />
 
 
     </RelativeLayout>

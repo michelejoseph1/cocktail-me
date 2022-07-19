@@ -2,7 +2,9 @@ package com.example.cocktailme;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +30,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     public AsyncHttpClient client;
     int cocktailID;
     ImageView cocktailImage;
+    RatingBar ratingBar;
+    Double voteAverage;
+
 
 
 
@@ -41,15 +46,20 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         measurementsText = findViewById(R.id.detailRecipeInstruction);
         cocktailImage = findViewById(R.id.ivCocktail);
         recipeModel = (RecipeModel) getIntent().getParcelableExtra(RecipeModel.class.getName());
-
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         recipeTitle.setText(recipeModel.getRecipeName());
-
         client = new AsyncHttpClient();
-
         cocktailID = recipeModel.getId();
         getInstructions(cocktailID);
 
     }
+
+    public void setRatingText(View v)
+    {
+        TextView t = (TextView)findViewById(R.id.avgRatingText);
+        t.setText("The average rating for this cocktail is: ");
+    }
+
     public void getInstructions(int cocktailID) {
         RequestHeaders headers = new RequestHeaders();
         RequestParams params = new RequestParams();
