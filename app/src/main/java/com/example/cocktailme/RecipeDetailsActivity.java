@@ -40,6 +40,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     protected List<Rating> ratingsList;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         TextView t = (TextView) findViewById(R.id.avgRatingText);
         t.setText("The average rating for this cocktail is: ");
     }
+
 
     public void getInstructions(int cocktailID) {
         RequestHeaders headers = new RequestHeaders();
