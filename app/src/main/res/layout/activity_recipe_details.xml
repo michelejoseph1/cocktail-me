@@ -134,12 +134,12 @@
 
         <TextView
             android:id="@+id/avgRatingText"
-            android:layout_width="wrap_content"
+            android:layout_width="263dp"
             android:layout_height="36dp"
             android:layout_below="@+id/ratingBar"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="7dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="11dp"
             android:textColorHint="@color/black"
             android:textSize="14sp"
             tools:text="The average rating for this cocktail is 5.0 stars!" />
@@ -149,12 +149,12 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_below="@+id/ratingBar"
-            android:layout_marginTop="33dp"
-            android:layout_marginEnd="-194dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="-177dp"
             android:layout_marginBottom="50dp"
             android:layout_toStartOf="@+id/avgRatingText"
             android:background="@android:color/holo_red_dark"
-            android:onClick="Call"
+            android:onClick="setRatingText"
             android:text="Submit"
             android:textColor="@android:color/background_light"
             android:textStyle="bold|italic" />

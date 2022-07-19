@@ -54,7 +54,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     }
 
-    public void Call(View v)
+    public void setRatingText(View v)
     {
         TextView t = (TextView)findViewById(R.id.avgRatingText);
         t.setText("The average rating for this cocktail is: ");
