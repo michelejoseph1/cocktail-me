@@ -44,7 +44,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     public List<Rating> ratingsList;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,13 +61,18 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         cocktailID = recipeModel.getId();
         getInstructions(cocktailID);
 
-}
-
-    public void setRatingText(View v, Cocktails cocktail) {
-        TextView t = (TextView) findViewById(R.id.avgRatingText);
-        t.setText("The average rating for this cocktail is: " + cocktail.getAverageRating());
     }
 
+    public void setRatingText(View v, Cocktails cocktail) {
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "entered onClick");
+                TextView t = (TextView) findViewById(R.id.avgRatingText);
+                t.setText("The average rating for this cocktail is: "+ cocktail.getAverageRating());
+            }
+        });
+    }
 
 
     public void getInstructions(int cocktailID) {
@@ -112,7 +116,32 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    public void onRatingChanged() {
+    ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        public void onRatingChanged(RatingBar ratingBar, float rating,
+        boolean fromUser) {
+            ratingBar.setRating((int)rating);
+        }
+    });
+}
+    public String getMeasurements(JSONArray drinks) throws JSONException {
+        String measurements = "";
+        for (int i = 1; i < 16; i++) {
+            String curr = "strIngredient" + i;
+            String measure = "strMeasure" + i;
+            if (drinks.getJSONObject(0).getString(curr) != null && drinks.getJSONObject(0).getString(measure) != null
+            ) {
+                Log.i(TAG, drinks.getJSONObject(0).getString(measure));
+                Log.i("Check", drinks.getJSONObject(0).getString(curr));
+                if (!drinks.getJSONObject(0).getString(curr).equals("null") && !drinks.getJSONObject(0).getString(measure).equals("null")) {
+                    measurements += drinks.getJSONObject(0).getString(measure) + " " + drinks.getJSONObject(0).getString(curr) + "\n ";
+                }
+            } else {
+                measurements = "Measurements not found";
+            }
+        }
+        return measurements;
+    }
 
     private void queryRatingsForCocktailID() {
         ratingsList = new ArrayList<Rating>();
@@ -135,6 +164,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
     private void queryUserForCocktailID() {
         ratingsList = new ArrayList<Rating>();
         ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
@@ -156,5 +186,5 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             }
         });
     }
-    }
+}
 
