@@ -15,7 +15,6 @@ import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cocktailme.db.RecipeModel;
-import com.example.cocktailme.models.Cocktails;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -39,7 +38,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     RatingBar ratingBar;
     Double voteAverage;
     protected List<Rating> ratingsList;
-    protected List<User> userList;
+
 
 
     @Override
@@ -57,8 +56,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         client = new AsyncHttpClient();
         cocktailID = recipeModel.getId();
         getInstructions(cocktailID);
-        queryRatings();
-    }
+        queryRatingsForCocktailID();
+        queryUserForCocktailID();
+}
 
     public void setRatingText(View v) {
         TextView t = (TextView) findViewById(R.id.avgRatingText);
