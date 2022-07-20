@@ -124,6 +124,24 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         }
     });
 }
+    public String getMeasurements(JSONArray drinks) throws JSONException {
+        String measurements = "";
+        for (int i = 1; i < 16; i++) {
+            String curr = "strIngredient" + i;
+            String measure = "strMeasure" + i;
+            if (drinks.getJSONObject(0).getString(curr) != null && drinks.getJSONObject(0).getString(measure) != null
+            ) {
+                Log.i(TAG, drinks.getJSONObject(0).getString(measure));
+                Log.i("Check", drinks.getJSONObject(0).getString(curr));
+                if (!drinks.getJSONObject(0).getString(curr).equals("null") && !drinks.getJSONObject(0).getString(measure).equals("null")) {
+                    measurements += drinks.getJSONObject(0).getString(measure) + " " + drinks.getJSONObject(0).getString(curr) + "\n ";
+                }
+            } else {
+                measurements = "Measurements not found";
+            }
+        }
+        return measurements;
+    }
     private void queryRatingsForCocktailID() {
         ratingsList = new ArrayList<Rating>();
         ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);

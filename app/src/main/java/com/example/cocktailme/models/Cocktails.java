@@ -35,7 +35,7 @@ public class Cocktails {
         for (int i = 0; i < ratings.size(); ++i) {
             total += Integer.parseInt(String.valueOf(ratings));
         }
-        int avg = (int) total / ratings.size();
+        double avg = (double) total / ratings.size();
         return avg;
     }
 
