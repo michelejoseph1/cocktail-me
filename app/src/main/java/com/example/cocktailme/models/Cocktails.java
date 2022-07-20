@@ -29,7 +29,7 @@ public class Cocktails {
         cocktailPath = jsonObject.getString("strDrinkThumb");
         cocktailID = jsonObject.getInt("idDrink");
     }
-    public int getAverageRating() {
+    public double getAverageRating() {
         List<Rating> ratings = new ArrayList<Rating>();
         int total = 0;
         for (int i = 0; i < ratings.size(); ++i) {
