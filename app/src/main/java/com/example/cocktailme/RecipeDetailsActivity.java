@@ -15,6 +15,7 @@ import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cocktailme.db.RecipeModel;
+import com.example.cocktailme.models.Cocktails;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -38,6 +39,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     RatingBar ratingBar;
     Double voteAverage;
     protected List<Rating> ratingsList;
+    protected List<User> userList;
 
 
     @Override
@@ -122,15 +124,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     }
 
-    private void queryRatings() {
+    private void queryRatingsForCocktailID() {
         ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
         query.include(Rating.KEY_USER);
         query.include(String.valueOf(Rating.COCKTAIL_ID));
         query.addDescendingOrder("createdAt");
+        query.whereEqualTo(Rating.KEY_USER, "cocktailID");
         query.findInBackground(new FindCallback<Rating>() {
             @Override
             public void done(List<Rating> ratings, ParseException e) {
-                // check for errors
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
@@ -142,5 +144,25 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             }
         });
     }
-}
+    private void queryUserForCocktailID() {
+        ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
+        query.include(Rating.KEY_USER);
+        query.include(String.valueOf(Rating.COCKTAIL_ID));
+        query.addDescendingOrder("createdAt");
+        query.whereEqualTo(Rating.COCKTAIL_ID, "user");
+        query.findInBackground(new FindCallback<Rating>() {
+            @Override
+            public void done(List<Rating> ratings, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for (Rating rating : ratings) {
+                    Log.i(TAG, "Post: " + rating.getCocktailId() + ", username: " + rating.getUser().getUsername());
+                }
+                ratingsList.addAll(ratings);
+            }
+        });
+    }
+    }
 
