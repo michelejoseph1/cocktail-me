@@ -17,6 +17,8 @@ public class Cocktails {
     String cocktailPath;
     int cocktailID;
     Rating rating;
+    public List<Rating> ratingsList;
+
     public static final String TAG = "Cocktails";
 
     public Cocktails() {
