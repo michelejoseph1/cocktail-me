@@ -1,6 +1,8 @@
 package com.example.cocktailme.models;
 
 
+import com.example.cocktailme.Rating;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +16,7 @@ public class Cocktails {
     String title;
     String cocktailPath;
     int cocktailID;
+    Rating rating;
     public static final String TAG = "Cocktails";
 
     public Cocktails() {
@@ -32,7 +35,6 @@ public class Cocktails {
         }
         return cocktailList;
     }
-
 
     public String getCocktailPath() {
         return String.format(cocktailPath);

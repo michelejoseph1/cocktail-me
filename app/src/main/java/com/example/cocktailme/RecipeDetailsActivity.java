@@ -15,15 +15,20 @@ import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cocktailme.db.RecipeModel;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import okhttp3.Headers;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
-
+    public static final String TAG = "RecipeDetailsActivity";
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/lookup.php";
     RecipeModel recipeModel;
     TextView recipeTitle, recipeInstructions, measurementsText;
@@ -32,7 +37,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     ImageView cocktailImage;
     RatingBar ratingBar;
     Double voteAverage;
-
+    protected List<Rating> ratingsList;
 
 
 
@@ -51,12 +56,12 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         client = new AsyncHttpClient();
         cocktailID = recipeModel.getId();
         getInstructions(cocktailID);
+        queryRatingsForCocktailID();
+        queryUserForCocktailID();
+}
 
-    }
-
-    public void setRatingText(View v)
-    {
-        TextView t = (TextView)findViewById(R.id.avgRatingText);
+    public void setRatingText(View v) {
+        TextView t = (TextView) findViewById(R.id.avgRatingText);
         t.setText("The average rating for this cocktail is: ");
     }
 
@@ -101,6 +106,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     }
                 });
     }
+
     public String getMeasurements(JSONArray drinks) throws JSONException {
         String measurements = "";
         for (int i = 1; i < 16; i++) {
@@ -108,13 +114,55 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             String measure = "strMeasure" + i;
             if (drinks.getJSONObject(0).getString(curr) != null && drinks.getJSONObject(0).getString(measure) != null
 
-            ){
-                measurements += drinks.getJSONObject(0).getString(measure) + " " + drinks.getJSONObject(0).getString(curr) +"\n ";
+            ) {
+                measurements += drinks.getJSONObject(0).getString(measure) + " " + drinks.getJSONObject(0).getString(curr) + "\n ";
             } else {
-               measurements = "Measurements not found";
+                measurements = "Measurements not found";
             }
         }
         return measurements;
+
     }
-}
+
+    private void queryRatingsForCocktailID() {
+        ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
+        query.include(Rating.KEY_USER);
+        query.include(String.valueOf(Rating.COCKTAIL_ID));
+        query.addDescendingOrder("createdAt");
+        query.whereEqualTo(Rating.KEY_USER, "cocktailID");
+        query.findInBackground(new FindCallback<Rating>() {
+            @Override
+            public void done(List<Rating> ratings, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for (Rating rating : ratings) {
+                    Log.i(TAG, "Post: " + rating.getRating() + ", username: " + rating.getUser().getUsername());
+                }
+                ratingsList.addAll(ratings);
+            }
+        });
+    }
+    private void queryUserForCocktailID() {
+        ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
+        query.include(Rating.KEY_USER);
+        query.include(String.valueOf(Rating.COCKTAIL_ID));
+        query.addDescendingOrder("createdAt");
+        query.whereEqualTo(Rating.COCKTAIL_ID, "user");
+        query.findInBackground(new FindCallback<Rating>() {
+            @Override
+            public void done(List<Rating> ratings, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for (Rating rating : ratings) {
+                    Log.i(TAG, "Post: " + rating.getCocktailId() + ", username: " + rating.getUser().getUsername());
+                }
+                ratingsList.addAll(ratings);
+            }
+        });
+    }
+    }
 
