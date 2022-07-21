@@ -16,7 +16,6 @@ import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cocktailme.db.RecipeModel;
-import com.example.cocktailme.models.Cocktails;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -63,13 +62,13 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     }
 
-    public void setRatingText(View v, Cocktails cocktail) {
+    public void setRatingText(View v) {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "entered onClick");
                 TextView t = (TextView) findViewById(R.id.avgRatingText);
-                t.setText("The average rating for this cocktail is: "+ cocktail.getAverageRating());
+                t.setText("The average rating for this cocktail is: 3.6 stars");
             }
         });
     }
@@ -124,24 +123,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         }
     });
 }
-    public String getMeasurements(JSONArray drinks) throws JSONException {
-        String measurements = "";
-        for (int i = 1; i < 16; i++) {
-            String curr = "strIngredient" + i;
-            String measure = "strMeasure" + i;
-            if (drinks.getJSONObject(0).getString(curr) != null && drinks.getJSONObject(0).getString(measure) != null
-            ) {
-                Log.i(TAG, drinks.getJSONObject(0).getString(measure));
-                Log.i("Check", drinks.getJSONObject(0).getString(curr));
-                if (!drinks.getJSONObject(0).getString(curr).equals("null") && !drinks.getJSONObject(0).getString(measure).equals("null")) {
-                    measurements += drinks.getJSONObject(0).getString(measure) + " " + drinks.getJSONObject(0).getString(curr) + "\n ";
-                }
-            } else {
-                measurements = "Measurements not found";
-            }
-        }
-        return measurements;
-    }
+
     private void queryRatingsForCocktailID() {
         ratingsList = new ArrayList<Rating>();
         ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
