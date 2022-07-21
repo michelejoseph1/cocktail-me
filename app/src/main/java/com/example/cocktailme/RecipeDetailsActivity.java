@@ -62,18 +62,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     }
 
-    public void setRatingText(View v) {
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "entered onClick");
-                TextView t = (TextView) findViewById(R.id.avgRatingText);
-                t.setText("The average rating for this cocktail is: 3.6 stars");
-            }
-        });
-    }
-
-
     public void getInstructions(int cocktailID) {
         RequestHeaders headers = new RequestHeaders();
         RequestParams params = new RequestParams();
