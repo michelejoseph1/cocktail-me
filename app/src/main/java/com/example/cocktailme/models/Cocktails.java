@@ -29,6 +29,15 @@ public class Cocktails {
         cocktailPath = jsonObject.getString("strDrinkThumb");
         cocktailID = jsonObject.getInt("idDrink");
     }
+    public double getAverageRating() {
+        List<Rating> ratings = new ArrayList<Rating>();
+        int total = 0;
+        for (int i = 0; i < ratings.size(); ++i) {
+            total += Integer.parseInt(String.valueOf(ratings));
+        }
+        double avg = (double) total / ratings.size();
+        return avg;
+    }
 
     public static List<Cocktails> fromJsonArray(JSONArray cocktailJsonArray) throws JSONException {
         List<Cocktails> cocktailList = new ArrayList<>();
