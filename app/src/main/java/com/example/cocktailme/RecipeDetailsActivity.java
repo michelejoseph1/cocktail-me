@@ -16,7 +16,6 @@ import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cocktailme.db.RecipeModel;
-import com.example.cocktailme.models.Cocktails;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -44,7 +43,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     public List<Rating> ratingsList;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,13 +60,18 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         cocktailID = recipeModel.getId();
         getInstructions(cocktailID);
 
-}
-
-    public void setRatingText(View v, Cocktails cocktail) {
-        TextView t = (TextView) findViewById(R.id.avgRatingText);
-        t.setText("The average rating for this cocktail is: " + cocktail.getAverageRating());
     }
 
+    public void setRatingText(View v) {
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "entered onClick");
+                TextView t = (TextView) findViewById(R.id.avgRatingText);
+                t.setText("The average rating for this cocktail is: " + cocktail.getAverageRating() + "stars");
+            }
+        });
+    }
 
 
     public void getInstructions(int cocktailID) {
@@ -112,7 +115,14 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    public void onRatingChanged() {
+    ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        public void onRatingChanged(RatingBar ratingBar, float rating,
+        boolean fromUser) {
+            ratingBar.setRating((int)rating);
+        }
+    });
+}
 
     private void queryRatingsForCocktailID() {
         ratingsList = new ArrayList<Rating>();
@@ -135,6 +145,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
     private void queryUserForCocktailID() {
         ratingsList = new ArrayList<Rating>();
         ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
@@ -156,5 +167,5 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             }
         });
     }
-    }
+}
 
