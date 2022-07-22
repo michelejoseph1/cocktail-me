@@ -64,7 +64,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
     protected List<Rating> allRatings;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +122,7 @@ public class CocktailNamesActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
-        queryAverageRatings();
+        //queryAverageRatings();
         getRecipes(insertedIngredients);
     }
 
@@ -184,24 +183,24 @@ public class CocktailNamesActivity extends AppCompatActivity {
 
             }
         });
-    }
-    private void queryAverageRatings() {
-        ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
-        query.include(Rating.KEY_USER);
-        query.addDescendingOrder("averageNumStars");
-        query.findInBackground(new FindCallback<Rating>() {
-            @Override
-            public void done(List<Rating> ratings, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting ratings", e);
-                    return;
-                }
-                for (Rating rating : ratings) {
-                    Log.i(TAG, "Rating: " + rating.getRating() + ", username: " + rating.getUser().getUsername());
-                }
-                allRatings.addAll(ratings);
-                adapter.notifyDataSetChanged();
-            }
-        });
+
+//    private void queryAverageRatings() {
+//        ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
+//        query.include(Rating.KEY_USER);
+//        query.addDescendingOrder("averageNumStars");
+//        query.findInBackground(new FindCallback<Rating>() {
+//            @Override
+//            public void done(List<Rating> ratings, ParseException e) {
+//                if (e != null) {
+//                    Log.e(TAG, "Issue with getting ratings", e);
+//                    return;
+//                }
+//                for (Rating rating : ratings) {
+//                    Log.i(TAG, "Rating: " + rating.getRating() + ", username: " + rating.getUser().getUsername());
+//                }
+//                allRatings.addAll(ratings);
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
     }
 }

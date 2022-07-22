@@ -49,9 +49,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     protected List<Rating> allRatings;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +67,18 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         allRatings = new ArrayList<>();
         adapter = new RatingsAdapter(this, allRatings);
         getInstructions(cocktailID);
+        submitButton.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                float numStars = ratingBar.getRating();
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                saveRating(numStars, currentUser);
+            }
+        });
     }
+
     public void setRatingText(View v) {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,7 +216,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 for (Rating rating : ratings) {
                     Log.i(TAG, "Post: " + rating.getCocktailId() + ", username: " + rating.getUser().getUsername());
                 }
-                ratingsList.addAll(ratings);
+               // ratingsList.addAll(ratings);
             }
         });
     }
