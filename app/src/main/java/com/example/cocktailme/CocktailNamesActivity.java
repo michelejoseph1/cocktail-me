@@ -60,6 +60,10 @@ public class CocktailNamesActivity extends AppCompatActivity {
     FirebaseFirestore firestoreHolder;
     ArrayList<String> ratings;
     ArrayAdapter ratingsArrayAdapter;
+    protected RatingsAdapter adapter;
+    protected List<Rating> allRatings;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,8 @@ public class CocktailNamesActivity extends AppCompatActivity {
         insertedIngredients = getIntent().getStringExtra("search");
         cocktails = new ArrayList<>();
         cocktailAdapter = new CocktailAdapter(this, cocktails);
+        allRatings = new ArrayList<>();
+        adapter = new RatingsAdapter(this, allRatings);
 
 
         firestoreHolder = FirebaseFirestore.getInstance();
@@ -117,10 +123,11 @@ public class CocktailNamesActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
-        getRecipesMethod(insertedIngredients);
+        queryAverageRatings();
+        getRecipes(insertedIngredients);
     }
 
-    public void getRecipesMethod(String insertedIngredients) {
+    public void getRecipes(String insertedIngredients) {
         RequestHeaders headers = new RequestHeaders();
         RequestParams params = new RequestParams();
         params.put("i", insertedIngredients);
@@ -142,7 +149,7 @@ public class CocktailNamesActivity extends AppCompatActivity {
                     cocktails.addAll(RecipeModel.fromJsonArray(drinks));
                     cocktailAdapter.notifyDataSetChanged();
                     Log.d(TAG, "Results: " + drinks.toString());
-                    cocktailsArray.addAll(Cocktails.fromJsonArray(drinks));
+//                    cocktailsArray.addAll(Cocktails.fromJsonArray(drinks));
                     Log.d(TAG, "ArrayList results: " + drinks.toString());
 
 
@@ -156,10 +163,10 @@ public class CocktailNamesActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailure" + statusCode + response);
             }
         });
-        sortRecipesMethod(cocktailsArray);
+        sortRecipes(cocktailsArray);
     }
 
-    public void sortRecipesMethod(ArrayList<Cocktails> cocktailsArrayList) {
+    public void sortRecipes(ArrayList<Cocktails> cocktailsArrayList) {
         ratingsArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ratings);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("numRating");
         query.addAscendingOrder("numRating");
@@ -175,6 +182,25 @@ public class CocktailNamesActivity extends AppCompatActivity {
                     }
                 }
 
+            }
+        });
+    }
+    private void queryAverageRatings() {
+        ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
+        query.include(Rating.KEY_USER);
+        query.addDescendingOrder("averageNumStars");
+        query.findInBackground(new FindCallback<Rating>() {
+            @Override
+            public void done(List<Rating> ratings, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting ratings", e);
+                    return;
+                }
+                for (Rating rating : ratings) {
+                    Log.i(TAG, "Rating: " + rating.getRating() + ", username: " + rating.getUser().getUsername());
+                }
+                allRatings.addAll(ratings);
+                adapter.notifyDataSetChanged();
             }
         });
     }
