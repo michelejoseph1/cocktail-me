@@ -19,6 +19,8 @@ import com.example.cocktailme.db.RecipeModel;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,12 +43,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     Double voteAverage;
     Button submitButton;
     public List<Rating> ratingsList;
-<<<<<<< HEAD
-    protected RatingsAdapter adapter;
-    protected List<Rating> allRatings;
-=======
->>>>>>> parent of 4696ad5 (adds ratingsadapter to population numAverageRatings and update recyclerview with highest ratings across all users)
-
+    Rating rating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,21 +60,22 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         recipeTitle.setText(recipeModel.getRecipeName());
         client = new AsyncHttpClient();
         cocktailID = recipeModel.getId();
-        getInstructions(cocktailID);
-<<<<<<< HEAD
-        submitButton.setOnClickListener(new View.OnClickListener()
 
+        getInstructions(cocktailID);
+        onRatingChanged();
+        queryUserForCocktailID();
+        queryRatingsForCocktailID();
+
+        submitButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick (View v){
-                float numStars = ratingBar.getRating();
+                float numStars = rating.getRating();
+                int cocktailID = rating.getCocktailId();
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                saveRating(numStars, currentUser);
+                saveRating(numStars, currentUser, cocktailID);
             }
         });
-=======
-
->>>>>>> parent of 4696ad5 (adds ratingsadapter to population numAverageRatings and update recyclerview with highest ratings across all users)
     }
 
     public void setRatingText(View v) {
@@ -86,7 +84,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i(TAG, "entered onClick");
                 TextView t = (TextView) findViewById(R.id.avgRatingText);
-                t.setText("The average rating for this cocktail is: " + cocktail.getAverageRating() + "stars");
+                t.setText("The average rating for this cocktail is: " + ratingBar.getRating() + "stars");
             }
         });
     }
@@ -161,6 +159,23 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         }
     });
 }
+    private void saveRating(float numStars, ParseUser currentUser, int cocktailID) {
+        Rating rating = new Rating();
+        rating.setRating(numStars);
+        rating.setUser(currentUser);
+        rating.setCocktailId(cocktailID);
+        rating.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "error while saving", e);
+                }
+                Log.i(TAG, "post save was successful");
+                ratingBar.setRating(0);
+            }
+
+        });
+    }
 
     private void queryRatingsForCocktailID() {
         ratingsList = new ArrayList<Rating>();

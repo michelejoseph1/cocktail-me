@@ -60,12 +60,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
     FirebaseFirestore firestoreHolder;
     ArrayList<String> ratings;
     ArrayAdapter ratingsArrayAdapter;
-<<<<<<< HEAD
-    protected RatingsAdapter adapter;
-    protected List<Rating> allRatings;
-
-=======
->>>>>>> parent of 4696ad5 (adds ratingsadapter to population numAverageRatings and update recyclerview with highest ratings across all users)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,12 +117,8 @@ public class CocktailNamesActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
-<<<<<<< HEAD
-        //queryAverageRatings();
-        getRecipes(insertedIngredients);
-=======
+
         getRecipesMethod(insertedIngredients);
->>>>>>> parent of 4696ad5 (adds ratingsadapter to population numAverageRatings and update recyclerview with highest ratings across all users)
     }
 
     public void getRecipesMethod(String insertedIngredients) {
@@ -153,7 +143,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
                     cocktails.addAll(RecipeModel.fromJsonArray(drinks));
                     cocktailAdapter.notifyDataSetChanged();
                     Log.d(TAG, "Results: " + drinks.toString());
-                    cocktailsArray.addAll(Cocktails.fromJsonArray(drinks));
                     Log.d(TAG, "ArrayList results: " + drinks.toString());
 
 
@@ -188,7 +177,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
 
             }
         });
-<<<<<<< HEAD
 
 //    private void queryAverageRatings() {
 //        ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
@@ -208,7 +196,5 @@ public class CocktailNamesActivity extends AppCompatActivity {
 //                adapter.notifyDataSetChanged();
 //            }
 //        });
-=======
->>>>>>> parent of 4696ad5 (adds ratingsadapter to population numAverageRatings and update recyclerview with highest ratings across all users)
-    }
+}
 }
