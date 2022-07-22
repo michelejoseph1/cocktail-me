@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -20,8 +19,6 @@ import com.example.cocktailme.db.RecipeModel;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,31 +39,32 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     ImageView cocktailImage;
     RatingBar ratingBar;
     Double voteAverage;
-    private EditText etAverageRating;
-    private Button submitButton;
+    Button submitButton;
     public List<Rating> ratingsList;
+<<<<<<< HEAD
     protected RatingsAdapter adapter;
     protected List<Rating> allRatings;
+=======
+>>>>>>> parent of 4696ad5 (adds ratingsadapter to population numAverageRatings and update recyclerview with highest ratings across all users)
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
-        submitButton = findViewById(R.id.submitButton);
+
         recipeTitle = findViewById(R.id.detailRecipeTitle);
         recipeInstructions = findViewById(R.id.instructionTitle);
         measurementsText = findViewById(R.id.detailRecipeInstruction);
         cocktailImage = findViewById(R.id.ivCocktail);
-        recipeModel = getIntent().getParcelableExtra(RecipeModel.class.getName());
-        ratingBar = findViewById(R.id.ratingBar);
-        submitButton = findViewById(R.id.submitButton);
+        recipeModel = (RecipeModel) getIntent().getParcelableExtra(RecipeModel.class.getName());
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        submitButton = (Button) findViewById(R.id.submitButton);
         recipeTitle.setText(recipeModel.getRecipeName());
         client = new AsyncHttpClient();
         cocktailID = recipeModel.getId();
-        allRatings = new ArrayList<>();
-        adapter = new RatingsAdapter(this, allRatings);
         getInstructions(cocktailID);
+<<<<<<< HEAD
         submitButton.setOnClickListener(new View.OnClickListener()
 
         {
@@ -77,6 +75,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 saveRating(numStars, currentUser);
             }
         });
+=======
+
+>>>>>>> parent of 4696ad5 (adds ratingsadapter to population numAverageRatings and update recyclerview with highest ratings across all users)
     }
 
     public void setRatingText(View v) {
@@ -85,7 +86,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i(TAG, "entered onClick");
                 TextView t = (TextView) findViewById(R.id.avgRatingText);
-                t.setText("The average rating for this cocktail is: " + ratingBar.getRating() + " stars");
+                t.setText("The average rating for this cocktail is: " + cocktail.getAverageRating() + "stars");
             }
         });
     }
@@ -132,7 +133,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     }
                 });
     }
-
     public String getMeasurements(JSONArray drinks) throws JSONException {
         String measurements = "";
         for (int i = 1; i < 16; i++) {
@@ -150,32 +150,17 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             }
         }
         return measurements;
-
     }
+
 
     public void onRatingChanged() {
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            public void onRatingChanged(RatingBar ratingBar, float rating,
-                                        boolean fromUser) {
-                ratingBar.setRating((int) rating);
-            }
-        });
-    }
-    private void saveRating(float numStars, ParseUser currentUser) {
-        Rating rating = new Rating();
-        rating.setRating(numStars);
-        rating.setUser(currentUser);
-        rating.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "error while saving", e);
-                }
-                Log.i(TAG, "post save was successful");
-            }
-
-        });
-    }
+    ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        public void onRatingChanged(RatingBar ratingBar, float rating,
+        boolean fromUser) {
+            ratingBar.setRating((int)rating);
+        }
+    });
+}
 
     private void queryRatingsForCocktailID() {
         ratingsList = new ArrayList<Rating>();

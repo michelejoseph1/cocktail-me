@@ -60,9 +60,12 @@ public class CocktailNamesActivity extends AppCompatActivity {
     FirebaseFirestore firestoreHolder;
     ArrayList<String> ratings;
     ArrayAdapter ratingsArrayAdapter;
+<<<<<<< HEAD
     protected RatingsAdapter adapter;
     protected List<Rating> allRatings;
 
+=======
+>>>>>>> parent of 4696ad5 (adds ratingsadapter to population numAverageRatings and update recyclerview with highest ratings across all users)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +79,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
         insertedIngredients = getIntent().getStringExtra("search");
         cocktails = new ArrayList<>();
         cocktailAdapter = new CocktailAdapter(this, cocktails);
-        allRatings = new ArrayList<>();
-        adapter = new RatingsAdapter(this, allRatings);
 
 
         firestoreHolder = FirebaseFirestore.getInstance();
@@ -122,11 +123,15 @@ public class CocktailNamesActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
+<<<<<<< HEAD
         //queryAverageRatings();
         getRecipes(insertedIngredients);
+=======
+        getRecipesMethod(insertedIngredients);
+>>>>>>> parent of 4696ad5 (adds ratingsadapter to population numAverageRatings and update recyclerview with highest ratings across all users)
     }
 
-    public void getRecipes(String insertedIngredients) {
+    public void getRecipesMethod(String insertedIngredients) {
         RequestHeaders headers = new RequestHeaders();
         RequestParams params = new RequestParams();
         params.put("i", insertedIngredients);
@@ -148,7 +153,7 @@ public class CocktailNamesActivity extends AppCompatActivity {
                     cocktails.addAll(RecipeModel.fromJsonArray(drinks));
                     cocktailAdapter.notifyDataSetChanged();
                     Log.d(TAG, "Results: " + drinks.toString());
-//                    cocktailsArray.addAll(Cocktails.fromJsonArray(drinks));
+                    cocktailsArray.addAll(Cocktails.fromJsonArray(drinks));
                     Log.d(TAG, "ArrayList results: " + drinks.toString());
 
 
@@ -162,10 +167,10 @@ public class CocktailNamesActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailure" + statusCode + response);
             }
         });
-        sortRecipes(cocktailsArray);
+        sortRecipesMethod(cocktailsArray);
     }
 
-    public void sortRecipes(ArrayList<Cocktails> cocktailsArrayList) {
+    public void sortRecipesMethod(ArrayList<Cocktails> cocktailsArrayList) {
         ratingsArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ratings);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("numRating");
         query.addAscendingOrder("numRating");
@@ -183,6 +188,7 @@ public class CocktailNamesActivity extends AppCompatActivity {
 
             }
         });
+<<<<<<< HEAD
 
 //    private void queryAverageRatings() {
 //        ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
@@ -202,5 +208,7 @@ public class CocktailNamesActivity extends AppCompatActivity {
 //                adapter.notifyDataSetChanged();
 //            }
 //        });
+=======
+>>>>>>> parent of 4696ad5 (adds ratingsadapter to population numAverageRatings and update recyclerview with highest ratings across all users)
     }
 }

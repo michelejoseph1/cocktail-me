@@ -12,10 +12,10 @@ public class Rating extends ParseObject {
     public static String COCKTAIL_ID = "cocktailID";
 
 
-    public float getRating() {
-        return (float) getInt(KEY_NUMSTARS);
+    public int getRating() {
+        return getInt(KEY_NUMSTARS);
     }
-    public void setRating(float numRating) {
+    public void setRating(String numRating) {
         put(KEY_NUMSTARS, numRating);
     }
     public ParseUser getUser(){
