@@ -60,7 +60,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         recipeTitle.setText(recipeModel.getRecipeName());
         client = new AsyncHttpClient();
         cocktailID = recipeModel.getId();
-
         getInstructions(cocktailID);
         onRatingChanged();
         queryUserForCocktailID();
@@ -70,11 +69,13 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         {
             @Override
             public void onClick (View v){
-                float numStars = rating.getRating();
-                int cocktailID = rating.getCocktailId();
+                float numStars = ratingBar.getRating();
+                int cocktailID = recipeModel.getId();
                 ParseUser currentUser = ParseUser.getCurrentUser();
+
                 saveRating(numStars, currentUser, cocktailID);
-            }
+                TextView t = (TextView) findViewById(R.id.avgRatingText);
+                t.setText("The average rating for this cocktail is: " + ratingBar.getRating() + "stars");            }
         });
     }
 
@@ -160,8 +161,11 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     });
 }
     private void saveRating(float numStars, ParseUser currentUser, int cocktailID) {
+        Log.d(TAG, "entered saveRating");
         Rating rating = new Rating();
+        Log.d(TAG, "created empty rating object");
         rating.setRating(numStars);
+        Log.d(TAG, "set the rating");
         rating.setUser(currentUser);
         rating.setCocktailId(cocktailID);
         rating.saveInBackground(new SaveCallback() {
