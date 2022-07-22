@@ -19,6 +19,7 @@ import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.cocktailme.adapters.CocktailAdapter;
+import com.example.cocktailme.adapters.RatingsAdapter;
 import com.example.cocktailme.db.RecipeModel;
 import com.example.cocktailme.fragments.HomeFragment;
 import com.example.cocktailme.fragments.ProfileFragment;

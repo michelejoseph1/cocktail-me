@@ -16,6 +16,7 @@ import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.cocktailme.adapters.RatingsAdapter;
 import com.example.cocktailme.db.RecipeModel;
 import com.parse.FindCallback;
 import com.parse.ParseException;
