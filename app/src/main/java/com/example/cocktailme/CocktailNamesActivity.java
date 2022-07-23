@@ -6,7 +6,6 @@ import static com.example.cocktailme.models.Constants.SEARCH_API_LINK;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +38,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,11 +56,10 @@ public class CocktailNamesActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/filter.php";
     public List<RecipeModel> cocktails;
-    public ArrayList<Cocktails> cocktailsArray;
+    public ArrayList<Cocktails> cocktailsArray = new ArrayList<Cocktails>();
     public CocktailAdapter cocktailAdapter;
     FirebaseFirestore firestoreHolder;
-    ArrayList<String> ratings;
-    ArrayAdapter ratingsArrayAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,9 +141,12 @@ public class CocktailNamesActivity extends AppCompatActivity {
                 try {
                     JSONArray drinks = jsonObject.getJSONArray("drinks");
                     cocktails.addAll(RecipeModel.fromJsonArray(drinks));
-                    cocktailAdapter.notifyDataSetChanged();
+                    Log.d(TAG, "check: " + cocktailsArray.toString());
                     Log.d(TAG, "Results: " + drinks.toString());
                     Log.d(TAG, "ArrayList results: " + drinks.toString());
+                    cocktailsArray.addAll(Cocktails.fromJsonArray(drinks));
+                    sortRecipesMethod(cocktailsArray);
+
 
 
                 } catch (JSONException e) {
@@ -156,25 +159,31 @@ public class CocktailNamesActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailure" + statusCode + response);
             }
         });
-        sortRecipesMethod(cocktailsArray);
+    }
+    class SortByRating implements Comparator<Cocktails> {
+        public int compare(Cocktails cocktailOne, Cocktails cocktailTwo) {
+            Log.d(TAG, "test: " + cocktailOne);
+            return 1;
+        }
     }
 
-    public void sortRecipesMethod(ArrayList<Cocktails> cocktailsArrayList) {
-        ratingsArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ratings);
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("numRating");
-        query.addAscendingOrder("numRating");
+    public void sortRecipesMethod(ArrayList<Cocktails> cocktailsArray) {
+        Log.d(TAG, "checking: " + cocktailsArray.toString());
+        Collections.sort(cocktailsArray, new SortByRating());
+        cocktailAdapter.notifyDataSetChanged();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Rating");
+        query.addAscendingOrder("numStars");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> ratings, ParseException e) {
+                Log.d(TAG, "results" + ratings);
+                //Log.d(TAG, ratings);
                 if (e == null) {
                     if (ratings.size() > 0) {
                         for (ParseObject rating : ratings) {
-                            ratingsArrayAdapter.add(String.valueOf(rating.getInt("numRating")));
                         }
-                        ratingsArrayAdapter.notifyDataSetChanged();
-                    }
+                        }
                 }
-
             }
         });
 
