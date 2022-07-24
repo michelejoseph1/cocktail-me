@@ -68,7 +68,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i(TAG, "entered onClick");
                 TextView t = (TextView) findViewById(R.id.avgRatingText);
-                t.setText("The average rating for this cocktail is: " + cocktail.getAverageRating() + "stars");
+               // t.setText("The average rating for this cocktail is: " + cocktail.getAverageRating() + "stars");
             }
         });
     }
