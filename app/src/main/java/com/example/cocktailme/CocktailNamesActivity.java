@@ -6,8 +6,6 @@ import static com.example.cocktailme.models.Constants.SEARCH_API_LINK;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,7 +65,6 @@ public class CocktailNamesActivity extends AppCompatActivity {
         insertedIngredients = getIntent().getStringExtra("search");
         cocktails = new ArrayList<>();
         cocktailAdapter = new CocktailAdapter(this, cocktails);
-        Animation object = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom);
 
 
 
