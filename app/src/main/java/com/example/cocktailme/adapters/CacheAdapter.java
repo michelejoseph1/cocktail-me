@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,7 +52,7 @@ import java.util.List;
         public CacheAdapter(List<RecipeModel> newRecipeModels, OnRecipeListener onRecipeListener) {
 
             recipeModels.clear();
-            if (newRecipeModels != null){
+            if (newRecipeModels != null) {
                 recipeModels.addAll(newRecipeModels);
                 this.mOnRecipeListener = onRecipeListener;
             }
@@ -72,7 +70,6 @@ import java.util.List;
             Trace trace = FirebasePerformance.getInstance().newTrace("TimeToLoadRecipeFromCache");
             RecipeModel currentRecipeModel = recipeModels.get(position);
             holder.textView.setText(items.get(position));
-            setAnimation(holder.itemView, position);
             holder.textView.setText(currentRecipeModel.getRecipeName());
             Picasso.get().load(currentRecipeModel.getImage()).into(holder.imageView);
             holder.category.setText(currentRecipeModel.getCategory());
@@ -86,15 +83,5 @@ import java.util.List;
 
         public interface OnRecipeListener {
             void onRecipeClick(int position);
-            void onHorizontalRecipeClick(int position);
-        }
-        private void setAnimation(View viewToAnimate, int position)
-        {
-            if (position > lastPosition)
-            {
-                Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-                viewToAnimate.startAnimation(animation);
-                lastPosition = position;
-            }
         }
     }

@@ -76,10 +76,10 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 RecipeModel ingredient = recipeModels.get(position);
-                Bundle bndlanimation = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in,R.anim.fade_out).toBundle();
+                Bundle bundlanimation = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in,R.anim.fade_out).toBundle();
                 Intent intent = new Intent(context, RecipeDetailsActivity.class);
                 intent.putExtra(RecipeModel.class.getName(), ingredient);
-                context.startActivity(intent, bndlanimation);
+                context.startActivity(intent, bundlanimation);
             }
         }
     }
