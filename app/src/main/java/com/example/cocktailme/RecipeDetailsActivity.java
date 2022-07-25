@@ -59,15 +59,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         client = new AsyncHttpClient();
         cocktailID = recipeModel.getId();
         getInstructions(cocktailID);
-
-        cocktailImage.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                ratingBar.setRating(5);
-                return true;
-            }
-        });
     }
+
 
 
     public void setRatingText(View v) {
