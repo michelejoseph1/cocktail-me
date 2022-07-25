@@ -59,6 +59,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         client = new AsyncHttpClient();
         cocktailID = recipeModel.getId();
         getInstructions(cocktailID);
+
+
+        cocktailImage.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ratingBar.setRating(5);
+                return true;
+            }
+        });
     }
 
 
@@ -70,6 +79,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 Log.i(TAG, "entered onClick");
                 TextView t = (TextView) findViewById(R.id.avgRatingText);
                // t.setText("The average rating for this cocktail is: " + cocktail.getAverageRating() + "stars");
+
             }
         });
     }
