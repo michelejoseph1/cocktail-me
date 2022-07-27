@@ -144,6 +144,26 @@ public class CocktailNamesActivity extends AppCompatActivity {
                     Log.d(TAG, "check: " + cocktailsArray.toString());
                     Log.d(TAG, "Results: " + drinks.toString());
                     Log.d(TAG, "ArrayList results: " + drinks.toString());
+                    ParseQuery<Rating> query = ParseQuery.getQuery("Rating");
+                    query.addAscendingOrder("numStars");
+                    query.findInBackground(new FindCallback<Rating>() {
+                        @Override
+                        public void done(List<Rating> ratings, ParseException e) {
+                            Log.d("check", "results" + ratings);
+                            //Log.d(TAG, ratings);
+                            if (e == null) {
+                                if (ratings.size() > 0) {
+                                    for (Rating rating : ratings) {
+                                        for(RecipeModel recipeModel: cocktails) {
+                                            if(recipeModel.getId() == rating.getCocktailId()){
+                                                recipeModel.setRating(rating.getRating());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
                     cocktailsArray.addAll(Cocktails.fromJsonArray(drinks));
                     sortRecipesMethod(cocktailsArray);
 
@@ -167,9 +187,9 @@ public class CocktailNamesActivity extends AppCompatActivity {
         }
     }
 
-    public void sortRecipesMethod(ArrayList<Cocktails> cocktailsArray) {
+    public void sortRecipesMethod(ArrayList<Cocktails> cocktails) {
         Log.d(TAG, "checking: " + cocktailsArray.toString());
-        Collections.sort(cocktailsArray, new SortByRating());
+        Collections.sort(cocktails, new SortByRating());
         cocktailAdapter.notifyDataSetChanged();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Rating");
         query.addAscendingOrder("numStars");
@@ -186,6 +206,16 @@ public class CocktailNamesActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
+
+
+
+
+
+
 
 //    private void queryAverageRatings() {
 //        ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);

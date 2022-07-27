@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cocktailme.CocktailNamesActivity;
 import com.example.cocktailme.R;
+import com.example.cocktailme.Rating;
 import com.example.cocktailme.RecipeDetails;
 import com.example.cocktailme.adapters.CacheAdapter;
 import com.example.cocktailme.adapters.CocktailAdapter;
@@ -27,7 +28,12 @@ import com.example.cocktailme.db.DatabaseHelper;
 import com.example.cocktailme.db.RecipeModel;
 import com.example.cocktailme.network.RecipeApiService;
 import com.example.cocktailme.network.RecipeResponse;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -96,6 +102,40 @@ return view;
         cocktailList = tempActivity.cocktails;
         cocktailAdapter = tempActivity.cocktailAdapter;
         recyclerView.setAdapter(cocktailAdapter);
+        ParseQuery<Rating> query = ParseQuery.getQuery("Rating");
+        query.addAscendingOrder("numStars");
+        query.findInBackground(new FindCallback<Rating>() {
+            @Override
+            public void done(List<Rating> ratings, ParseException e) {
+                Log.d("check", "results" + ratings);
+                //Log.d(TAG, ratings);
+                if (e == null) {
+                    if (ratings.size() > 0) {
+                        for (Rating rating : ratings) {
+                            for(RecipeModel recipeModel: cocktailList) {
+                                if(recipeModel.getId() == rating.getCocktailId()){
+                                    recipeModel.setRating(rating.getRating());
+                                }
+                            }
+                        }
+                        Collections.sort(cocktailList, new Comparator<RecipeModel>() {
+                            @Override
+                            public int compare(RecipeModel o1, RecipeModel o2) {
+                                if(o1.getRating() > o2.getRating()) {
+                                    Log.d("unique", "results: " + o1.getRating() + o2.getRating());
+                                    return 1;
+                                }
+                                else if (o1.getRating() < o2.getRating()) {
+                                    return -1;
+                                }
+                                return 0;
+                            }
+                        });
+                        cocktailAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
 
 
     }
