@@ -1,5 +1,6 @@
 package com.example.cocktailme.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,9 @@ import java.util.List;
     public class CacheAdapter extends RecyclerView.Adapter<CacheAdapter.ViewHolder> {
         private List<RecipeModel> recipeModels = new ArrayList<>();
         private OnRecipeListener mOnRecipeListener;
+        private Context context;
+        private ArrayList<String> items;
+        private int lastPosition = -1;
 
 
         public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -28,6 +32,7 @@ import java.util.List;
             public ImageView imageView;
             public TextView category;
             OnRecipeListener onRecipeListener;
+
 
             public ViewHolder(View v, OnRecipeListener onRecipeListener) {
                 super(v);
@@ -47,7 +52,7 @@ import java.util.List;
         public CacheAdapter(List<RecipeModel> newRecipeModels, OnRecipeListener onRecipeListener) {
 
             recipeModels.clear();
-            if (newRecipeModels != null){
+            if (newRecipeModels != null) {
                 recipeModels.addAll(newRecipeModels);
                 this.mOnRecipeListener = onRecipeListener;
             }
@@ -64,6 +69,7 @@ import java.util.List;
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Trace trace = FirebasePerformance.getInstance().newTrace("TimeToLoadRecipeFromCache");
             RecipeModel currentRecipeModel = recipeModels.get(position);
+            holder.textView.setText(items.get(position));
             holder.textView.setText(currentRecipeModel.getRecipeName());
             Picasso.get().load(currentRecipeModel.getImage()).into(holder.imageView);
             holder.category.setText(currentRecipeModel.getCategory());
@@ -77,6 +83,5 @@ import java.util.List;
 
         public interface OnRecipeListener {
             void onRecipeClick(int position);
-            void onHorizontalRecipeClick(int position);
         }
     }

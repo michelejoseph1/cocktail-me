@@ -75,6 +75,7 @@ public class CocktailNamesActivity extends AppCompatActivity {
         cocktailAdapter = new CocktailAdapter(this, cocktails);
 
 
+
         firestoreHolder = FirebaseFirestore.getInstance();
         Map<String, Object> drinks = new HashMap<>();
         drinks.put("gin", cocktail.getRecipeTitle());

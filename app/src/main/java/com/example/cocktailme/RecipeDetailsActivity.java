@@ -76,8 +76,17 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 saveRating(numStars, currentUser, cocktailID);
                 TextView t = (TextView) findViewById(R.id.avgRatingText);
                 t.setText("The average rating for this cocktail is: " + ratingBar.getRating() + "stars");            }
+
+        cocktailImage.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ratingBar.setRating(5);
+                return true;
+            }
         });
     }
+
+
 
     public void setRatingText(View v) {
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +95,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 Log.i(TAG, "entered onClick");
                 TextView t = (TextView) findViewById(R.id.avgRatingText);
                 t.setText("The average rating for this cocktail is: " + ratingBar.getRating() + "stars");
+
             }
         });
     }

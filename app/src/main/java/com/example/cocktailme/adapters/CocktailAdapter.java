@@ -1,7 +1,9 @@
 package com.example.cocktailme.adapters;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,9 +76,10 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailAdapter.ViewHo
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 RecipeModel ingredient = recipeModels.get(position);
+                Bundle bundleAnimation = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in,R.anim.fade_out).toBundle();
                 Intent intent = new Intent(context, RecipeDetailsActivity.class);
                 intent.putExtra(RecipeModel.class.getName(), ingredient);
-                context.startActivity(intent);
+                context.startActivity(intent, bundleAnimation);
             }
         }
     }
