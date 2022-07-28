@@ -51,6 +51,7 @@ public class RecipeModel implements Parcelable {
     public static final String MEASUREMENT13 = "measurement13";
     public static final String MEASUREMENT14 = "measurement14";
     public static final String MEASUREMENT15 = "measurement15";
+    public float rating;
 
 
     @SerializedName("idDrink")
@@ -694,5 +695,11 @@ public class RecipeModel implements Parcelable {
         setRecipeName(jsonObject.getString("strDrink"));
         setImage(jsonObject.getString("strDrinkThumb"));
         setId(jsonObject.getInt("idDrink"));
+    }
+    public void setRating(float ratingBar) {
+        rating = ratingBar;
+    }
+    public float getRating() {
+        return rating;
     }
 }

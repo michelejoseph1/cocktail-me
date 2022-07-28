@@ -19,6 +19,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="What ingredients do you have?"
         android:textSize="18sp" />
@@ -27,12 +28,14 @@
          multiAutoCompleteTextViewDefault and here when user starts
          to type, it will show relevant substrings and after user chooses it,
          the text is ended with "," as comma is the default tokenizer -->
+
     <MultiAutoCompleteTextView
         android:id="@+id/multiAutoCompleteTextViewDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:ems="10"
+        android:fontFamily="serif"
         android:hint="Enter ingredients here"
         android:minHeight="48dp" />
 
@@ -40,15 +43,19 @@
         android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="155dp"
         app:srcCompat="@android:drawable/ic_menu_manage" />
 
     <Button
         android:id="@+id/generateButton"
-        android:layout_width="172dp"
+        android:layout_width="226dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="75dp"
         android:layout_marginTop="100dp"
-        android:text="generate me recipes!" />
+        android:backgroundTint="#FAA7C3"
+        android:text="generate me recipes!"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        />
 
     <!-- 2nd MultiAutoCompleteTextView instance identified with
          multiAutoCompleteTextViewCustom and here when user starts

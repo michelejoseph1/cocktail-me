@@ -28,12 +28,18 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,8 +56,10 @@ public class CocktailNamesActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     public static final String INGREDIENT_LIST_URL = "https://the-cocktail-db.p.rapidapi.com/filter.php";
     public List<RecipeModel> cocktails;
+    public ArrayList<Cocktails> cocktailsArray = new ArrayList<Cocktails>();
     public CocktailAdapter cocktailAdapter;
     FirebaseFirestore firestoreHolder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +118,8 @@ public class CocktailNamesActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
-        getRecipesMethod(insertedIngredients);
 
+        getRecipesMethod(insertedIngredients);
     }
 
     public void getRecipesMethod(String insertedIngredients) {
@@ -134,8 +142,33 @@ public class CocktailNamesActivity extends AppCompatActivity {
                 try {
                     JSONArray drinks = jsonObject.getJSONArray("drinks");
                     cocktails.addAll(RecipeModel.fromJsonArray(drinks));
-                    cocktailAdapter.notifyDataSetChanged();
+                    Log.d(TAG, "check: " + cocktailsArray.toString());
                     Log.d(TAG, "Results: " + drinks.toString());
+                    Log.d(TAG, "ArrayList results: " + drinks.toString());
+                    ParseQuery<Rating> query = ParseQuery.getQuery("Rating");
+                    query.addAscendingOrder("numStars");
+                    query.findInBackground(new FindCallback<Rating>() {
+                        @Override
+                        public void done(List<Rating> ratings, ParseException e) {
+                            Log.d("check", "results" + ratings);
+                            //Log.d(TAG, ratings);
+                            if (e == null) {
+                                if (ratings.size() > 0) {
+                                    for (Rating rating : ratings) {
+                                        for(RecipeModel recipeModel: cocktails) {
+                                            if(recipeModel.getId() == rating.getCocktailId()){
+                                                recipeModel.setRating(rating.getRating());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    cocktailsArray.addAll(Cocktails.fromJsonArray(drinks));
+                    sortRecipesMethod(cocktailsArray);
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -148,4 +181,60 @@ public class CocktailNamesActivity extends AppCompatActivity {
             }
         });
     }
+    class SortByRating implements Comparator<Cocktails> {
+        public int compare(Cocktails cocktailOne, Cocktails cocktailTwo) {
+            Log.d(TAG, "test: " + cocktailOne);
+            return 1;
+        }
+    }
+
+    public void sortRecipesMethod(ArrayList<Cocktails> cocktails) {
+        Log.d(TAG, "checking: " + cocktailsArray.toString());
+        Collections.sort(cocktails, new SortByRating());
+        cocktailAdapter.notifyDataSetChanged();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Rating");
+        query.addAscendingOrder("numStars");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> ratings, ParseException e) {
+                Log.d(TAG, "results" + ratings);
+                //Log.d(TAG, ratings);
+                if (e == null) {
+                    if (ratings.size() > 0) {
+                        for (ParseObject rating : ratings) {
+                        }
+                        }
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+//    private void queryAverageRatings() {
+//        ParseQuery<Rating> query = ParseQuery.getQuery(Rating.class);
+//        query.include(Rating.KEY_USER);
+//        query.addDescendingOrder("averageNumStars");
+//        query.findInBackground(new FindCallback<Rating>() {
+//            @Override
+//            public void done(List<Rating> ratings, ParseException e) {
+//                if (e != null) {
+//                    Log.e(TAG, "Issue with getting ratings", e);
+//                    return;
+//                }
+//                for (Rating rating : ratings) {
+//                    Log.i(TAG, "Rating: " + rating.getRating() + ", username: " + rating.getUser().getUsername());
+//                }
+//                allRatings.addAll(ratings);
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
+}
 }

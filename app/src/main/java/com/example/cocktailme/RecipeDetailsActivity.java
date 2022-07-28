@@ -19,6 +19,8 @@ import com.example.cocktailme.db.RecipeModel;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,7 +43,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     Double voteAverage;
     Button submitButton;
     public List<Rating> ratingsList;
-
+    Rating rating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,21 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         client = new AsyncHttpClient();
         cocktailID = recipeModel.getId();
         getInstructions(cocktailID);
+        onRatingChanged();
+        queryUserForCocktailID();
+        queryRatingsForCocktailID();
 
+        submitButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View v){
+                float numStars = ratingBar.getRating();
+                int cocktailID = recipeModel.getId();
+                ParseUser currentUser = ParseUser.getCurrentUser();
+
+                saveRating(numStars, currentUser, cocktailID);
+                TextView t = (TextView) findViewById(R.id.avgRatingText);
+                t.setText("The average rating for this cocktail is: " + ratingBar.getRating() + "stars");            }
 
         cocktailImage.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -78,7 +94,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i(TAG, "entered onClick");
                 TextView t = (TextView) findViewById(R.id.avgRatingText);
-               // t.setText("The average rating for this cocktail is: " + cocktail.getAverageRating() + "stars");
+                t.setText("The average rating for this cocktail is: " + ratingBar.getRating() + "stars");
 
             }
         });
@@ -154,6 +170,26 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         }
     });
 }
+    private void saveRating(float numStars, ParseUser currentUser, int cocktailID) {
+        Log.d(TAG, "entered saveRating");
+        Rating rating = new Rating();
+        Log.d(TAG, "created empty rating object");
+        rating.setRating(numStars);
+        Log.d(TAG, "set the rating");
+        rating.setUser(currentUser);
+        rating.setCocktailId(cocktailID);
+        rating.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "error while saving", e);
+                }
+                Log.i(TAG, "post save was successful");
+                ratingBar.setRating(0);
+            }
+
+        });
+    }
 
     private void queryRatingsForCocktailID() {
         ratingsList = new ArrayList<Rating>();
@@ -194,7 +230,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 for (Rating rating : ratings) {
                     Log.i(TAG, "Post: " + rating.getCocktailId() + ", username: " + rating.getUser().getUsername());
                 }
-                ratingsList.addAll(ratings);
+               // ratingsList.addAll(ratings);
             }
         });
     }
